@@ -1,8 +1,8 @@
-import './App.css';
+import "./App.css";
 
-import { } from 'react';
+import { } from "react";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 function App() {
 
