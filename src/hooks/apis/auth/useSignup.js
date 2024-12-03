@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signupRequest } from "@/apis/auth";
 
 function useSignup() {
-    const { mutate : signupMutate, isLoading, error, data, isSuccess } = useMutation({
+    const { mutateAsync : signupMutateAsync, isLoading, error, data, isSuccess } = useMutation({
         mutationFn: signupRequest,
         onSuccess: (data) => {
             console.log("Successfully signed up", data);
@@ -15,7 +15,7 @@ function useSignup() {
 
 
     return {
-        signupMutate,
+        signupMutateAsync,
         isLoading,
         error,
         data,

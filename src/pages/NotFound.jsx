@@ -13,11 +13,18 @@ function NotFound() {
     <img className="h-32 md:h-40" src={confusedImage} alt="Not found" />
       <h1 className="text-6xl md:text-8xl font-bold text-gray-800">404</h1>
       <p className="mt-4 text-base text-gray-600">Oops! Page not found.</p>
-      <Button className="mt-4" size="lg" variant="outline"
+      <div className="flex gap-2 mt-4">
+      <Button  size="lg" variant="outline"
       onClick={() => navigator(-1)}
       >
         Go Back
       </Button>
+      <Button  size="lg" 
+      onClick={() => navigator("/")}
+      >
+        Go Home
+      </Button>
+      </div>
     </div>
     </div>
   );
