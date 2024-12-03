@@ -1,16 +1,17 @@
 import "./App.css";
 
-import { } from "react";
+import {} from "react";
+import { Route, Routes } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
+import Signup from "./components/organisms/auth/Signup";
+import Auth from "./pages/auth/Auth";
 
 function App() {
-
   return (
-    <>
-      <h1 className='text-3xl font-bold underline'>Hello World</h1>
-      <Button>Button</Button>
-    </>
+    
+    <Routes>
+      <Route path="/signup" element={<Auth><Signup/></Auth>} />
+    </Routes>
   );
 }
 
