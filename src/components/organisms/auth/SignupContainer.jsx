@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import useSignup from "@/hooks/apis/auth/useSignup";
 
 import Signup from "./Signup";
-import { useNavigate } from "react-router-dom";
 
 function SignupContainer() {
   const [signupFormData, setSignupFormData] = useState({
@@ -18,7 +18,7 @@ function SignupContainer() {
   const [signupError, setSignupError] = useState(null);
   const [hidePassword, setHidePassword] = useState(true);
 
-  const { signupMutateAsync, isLoading, error, data, isSuccess } = useSignup();
+  const { signupMutateAsync, isLoading, error, isSuccess } = useSignup();
 
   async function handleSighupClick(e) {
     e.preventDefault();
@@ -60,7 +60,7 @@ function SignupContainer() {
         navigator("/signin");
       }, 3000);
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigator]);
  
 
   return (

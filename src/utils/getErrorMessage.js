@@ -1,5 +1,4 @@
 export function getErrorMessage(error) {
-    console.log(error, "getErrorMessage");
     if (error?.err[0]){
         return error.err[0];
     }
