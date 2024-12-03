@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -14,14 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-function Signin() {
-  const [signupFormData, setSignupFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [hidePassword, setHidePassword] = useState(true);
-
+function Signin({signupFormData, setSignupFormData, hidePassword, setHidePassword}) {
+ 
   return (
     <Card className="w-full h-full flex flex-col border-none shadow-none">
       <CardHeader>

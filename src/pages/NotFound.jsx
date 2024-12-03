@@ -1,9 +1,7 @@
-import React from "react";
-import { PiImageBrokenLight } from "react-icons/pi";
-
-import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+
 import confusedImage from "@/assets/gifs/confuced.gif";
+import { Button } from "@/components/ui/button";
 
 function NotFound() {
 
