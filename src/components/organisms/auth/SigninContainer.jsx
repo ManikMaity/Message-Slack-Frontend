@@ -1,21 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Signin from "./Signin";
+import useSignin from "@/hooks/apis/auth/useSignin";
+import { useNavigate } from "react-router-dom";
 
 function SigninContainer() {
-  const [signupFormData, setSignupFormData] = useState({
+  const [signinFormData, setSigninFormData] = useState({
     email: "",
     password: "",
   });
+  const [signinError, setSigninError] = useState(null);
+
+  const navigator = useNavigate();
+
+  const { signinMutateAsync, isError, isLoading, isSuccess, error } =
+    useSignin();
 
   const [hidePassword, setHidePassword] = useState(true);
+
+  async function handleSigninSubmit(e) {
+    e.preventDefault();
+
+    if (
+      signinFormData.email.trim() === "" ||
+      signinFormData.password.trim() === ""
+    ) {
+      console.log("Please fill all the fields");
+      setSigninError({ message: "Please fill all the fields" });
+      return;
+    }
+
+    setSigninError(null);
+
+    await signinMutateAsync({
+      email: signinFormData.email,
+      password: signinFormData.password,
+    });
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      setSigninFormData({
+        email: "",
+        password: "",
+      });
+
+      setTimeout(() => {
+        navigator("/");
+      }, 3000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <Signin
       setHidePassword={setHidePassword}
       hidePassword={hidePassword}
-      setSignupFormData={setSignupFormData}
-      signupFormData={signupFormData}
+      setSigninFormData={setSigninFormData}
+      signinFormData={signinFormData}
+      handleSigninSubmit={handleSigninSubmit}
+      signinError={signinError}
+      signinBackendError={error}
+      signinLoading={isLoading}
+      signinSuccess={isSuccess}
+      isSigninError={isError}
     />
   );
 }

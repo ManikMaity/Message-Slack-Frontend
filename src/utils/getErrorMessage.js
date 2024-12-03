@@ -1,5 +1,5 @@
 export function getErrorMessage(error) {
-    if (error?.err[0]){
+    if (Array.isArray(error?.err) && error?.err[0]){
         return error.err[0];
     }
     else if (error?.message){
