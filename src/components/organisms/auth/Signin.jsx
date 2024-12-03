@@ -1,3 +1,4 @@
+import { Loader2, LucideLoader2, TriangleAlert } from "lucide-react";
 import { AiOutlineEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, LucideLoader2, TriangleAlert } from "lucide-react";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
 function Signin({
