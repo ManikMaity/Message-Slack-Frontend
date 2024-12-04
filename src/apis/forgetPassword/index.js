@@ -10,3 +10,15 @@ export async function forgetPasswordRequest(email){
         throw err.response.data;
     }
 }
+
+export async function resetPasswordRequest(data){
+    try {
+        const response = await axios.post("/user/reset-password", data);
+
+        return response.data;
+    }
+    catch(err){
+        console.log(err, "Foget password api error");
+        throw err.response.data;
+    }
+}

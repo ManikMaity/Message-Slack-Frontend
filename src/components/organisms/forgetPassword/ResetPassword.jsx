@@ -1,3 +1,4 @@
+import { Loader2, LucideLoader2, TriangleAlert } from "lucide-react";
 import { AiOutlineEye } from "react-icons/ai";
 
 import { Button } from "@/components/ui/button";
@@ -10,8 +11,9 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
-function ResetPassword({formData, setFormData, hidePassword, setHidePassword}) {
+function ResetPassword({formData, setFormData, hidePassword, setHidePassword, onSubmit, clientError, isPending, isError, isSuccess, error}) {
     return (
       <Card className="w-full h-full flex flex-col border-none shadow-none">
         <CardHeader>
@@ -22,9 +24,9 @@ function ResetPassword({formData, setFormData, hidePassword, setHidePassword}) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form >
+          <form onSubmit={onSubmit}>
             <div className="grid w-full items-center gap-4">
-              {/* {clientError && (
+              {clientError && (
                 <div className="flex text-sm gap-2 items-center bg-red-500/15 p-3 rounded-lg">
                   <TriangleAlert className="text-red-500 size-4" />
                   <p>{clientError.message}</p>
@@ -42,10 +44,10 @@ function ResetPassword({formData, setFormData, hidePassword, setHidePassword}) {
                 <div className="flex text-sm gap-2 items-center bg-green-500/15 p-3 rounded-lg">
                   <LucideLoader2 className="text-green-500 size-4 animate-spin" />
                   <p>
-                   Successfully sent reset password link to email. Check your email.
+                    Password reset successfully, Redirecting to signin page
                   </p>
                 </div>
-              )} */}
+              )}
              <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Password</Label>
               <div className="flex gap-1">
@@ -87,12 +89,12 @@ function ResetPassword({formData, setFormData, hidePassword, setHidePassword}) {
               />
             </div>
               <Button
-                //   disabled={isPending}
+                  disabled={isPending}
                   size="lg"
                   type="submit"
                   className="w-full"
                 >
-                  {/* {isPending && <Loader2 className="animate-spin" />} */}
+                  {isPending && <Loader2 className="animate-spin" />}
                   Reset Password
                 </Button>
             </div>

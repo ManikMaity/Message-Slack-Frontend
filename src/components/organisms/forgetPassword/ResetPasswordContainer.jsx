@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResetPassword from "./ResetPassword";
+import useResetPassword from "@/hooks/forgetPassword/useResetPassword";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ResetPasswordContainer() {
   const [formData, setFormData] = useState({
@@ -7,6 +9,43 @@ function ResetPasswordContainer() {
     confirmPassword: "",
   });
   const [hidePassword, setHidePassword] = useState(true);
+  const [clientError, setClientError] = useState(null);
+  const { token } = useParams();
+  const navigator = useNavigate();
+
+  const { isError, error, isPending, isSuccess, resetPasswordMutateAsync } =
+    useResetPassword();
+
+  async function handleResetPasswordSubmit(e) {
+    e.preventDefault();
+    if (
+      formData.password.trim() === "" ||
+      formData.confirmPassword.trim() === ""
+    ) {
+      setClientError({ message: "Please fill all the fields" });
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setClientError({ message: "Passwords do not match" });
+      return;
+    }
+    await resetPasswordMutateAsync({
+      hash: token,
+      password: formData.password,
+    });
+  }
+
+  useEffect(() => {
+    if(isSuccess){
+      setFormData({password: "", confirmPassword: ""});
+      setClientError(null);
+      setTimeout(() => {
+        navigator("/signin");
+      }, 3000);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <ResetPassword
@@ -14,6 +53,12 @@ function ResetPasswordContainer() {
       hidePassword={hidePassword}
       setHidePassword={setHidePassword}
       setFormData={setFormData}
+      onSubmit={handleResetPasswordSubmit}
+      error={error}
+      isError={isError}
+      isPending={isPending}
+      isSuccess={isSuccess}
+      clientError={clientError}
     />
   );
 }
