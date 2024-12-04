@@ -11,6 +11,7 @@ import Auth from "@/pages/auth/Auth";
 import NotFound from "@/pages/NotFound";
 
 import ForgetPasswordContainer from "./components/organisms/forgetPassword/ForgetPasswordContainer";
+import ResetPasswordContainer from "./components/organisms/forgetPassword/ResetPasswordContainer";
 
 function App() {
   const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ function App() {
           }
         />
         <Route path="/forgetPassword" element={<Auth><ForgetPasswordContainer/></Auth>} />
+        <Route path="/reset-password/:token" element={<Auth><ResetPasswordContainer/></Auth>} />
         <Route path="/" element={<div>Home</div>} />
         <Route path="/*" element={<NotFound />} />
       </Routes>

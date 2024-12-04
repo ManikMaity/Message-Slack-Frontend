@@ -1,5 +1,3 @@
-// import { Loader2, LucideLoader2, TriangleAlert } from "lucide-react";
-// import { AiOutlineEye } from "react-icons/ai";
 import { Loader2, LucideLoader2, TriangleAlert } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -15,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { getErrorMessage } from "@/utils/getErrorMessage";
-// import { getErrorMessage } from "@/utils/getErrorMessage";
 
 function ForgetPassword({email, setEmail, onSubmit, clientError, isPending, isError, isSuccess, error}) {
     return (
