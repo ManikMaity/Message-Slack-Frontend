@@ -10,6 +10,8 @@ import { Toaster } from "@/components/ui/toaster";
 import Auth from "@/pages/auth/Auth";
 import NotFound from "@/pages/NotFound";
 
+import ForgetPasswordContainer from "./components/organisms/forgetPassword/ForgetPasswordContainer";
+
 function App() {
   const queryClient = new QueryClient();
 
@@ -32,6 +34,8 @@ function App() {
             </Auth>
           }
         />
+        <Route path="/forgetPassword" element={<Auth><ForgetPasswordContainer/></Auth>} />
+        <Route path="/" element={<div>Home</div>} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Toaster />
