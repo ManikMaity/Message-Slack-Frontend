@@ -1,5 +1,5 @@
-import CombinedContext from "@/utils/CombinedContext";
 import { AuthProvider } from "@/context/AuthContext";
+import CombinedContext from "@/utils/CombinedContext";
 
 const CombinedContextProvier = CombinedContext(AuthProvider);
 
