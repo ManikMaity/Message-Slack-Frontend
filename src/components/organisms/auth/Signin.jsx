@@ -57,7 +57,7 @@ function Signin({
               <div className="flex text-sm gap-2 items-center bg-green-500/15 p-3 rounded-lg">
                 <LucideLoader2 className="text-green-500 size-4 animate-spin" />
                 <p>
-                  Successfully signed in. You will be redirected to home page in
+                  Successfully signed in. You will be redirected to workspaces page in
                   few seconds.
                 </p>
               </div>
@@ -102,7 +102,7 @@ function Signin({
               </div>
             </div>
 
-            <Link href="#" className="ml-auto inline-block text-sm underline">
+            <Link to="/forgetPassword" className="ml-auto inline-block text-sm underline">
               Forgot your password?
             </Link>
 

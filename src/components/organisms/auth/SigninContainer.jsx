@@ -47,7 +47,7 @@ function SigninContainer() {
       });
 
       setTimeout(() => {
-        navigator("/");
+        navigator("/workspaces");
       }, 3000);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

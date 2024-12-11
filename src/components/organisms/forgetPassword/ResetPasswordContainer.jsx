@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import ResetPassword from "./ResetPassword";
-import useResetPassword from "@/hooks/forgetPassword/useResetPassword";
 import { useNavigate, useParams } from "react-router-dom";
+
+import useResetPassword from "@/hooks/forgetPassword/useResetPassword";
+
+import ResetPassword from "./ResetPassword";
 
 function ResetPasswordContainer() {
   const [formData, setFormData] = useState({

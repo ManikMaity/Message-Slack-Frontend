@@ -17,7 +17,7 @@ function useSignin() {
         localStorage.setItem("access-token", data?.data?.token);
         toast({
             title: "Signined in Successfully",
-            description: "You will be redirected to home page in a few seconds",
+            description: "You will be redirected to workspaces page in a few seconds",
             type: "success",
         });
     },

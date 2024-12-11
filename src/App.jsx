@@ -37,6 +37,7 @@ function App() {
         />
         <Route path="/forgetPassword" element={<Auth><ForgetPasswordContainer/></Auth>} />
         <Route path="/reset-password/:token" element={<Auth><ResetPasswordContainer/></Auth>} />
+        <Route path="/workspaces" element={<div>Workspaces</div>} />
         <Route path="/" element={<div>Home</div>} />
         <Route path="/*" element={<NotFound />} />
       </Routes>

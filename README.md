@@ -33,3 +33,6 @@ export default defineConfig({
 })
 ```
 - all other steps are same.
+
+## Task
+- Collect the token after signing in , redirect to workspace page, feth all the workspace , if not workspace found pop up to make a workspace.
