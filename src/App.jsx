@@ -12,12 +12,15 @@ import NotFound from "@/pages/NotFound";
 
 import ForgetPasswordContainer from "./components/organisms/forgetPassword/ForgetPasswordContainer";
 import ResetPasswordContainer from "./components/organisms/forgetPassword/ResetPasswordContainer";
+import Workspaces from "./pages/Workspaces";
+import AppContextProvider from "./context/AppContextProvider";
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AppContextProvider>
       <Routes>
         <Route
           path="/signup"
@@ -37,11 +40,12 @@ function App() {
         />
         <Route path="/forgetPassword" element={<Auth><ForgetPasswordContainer/></Auth>} />
         <Route path="/reset-password/:token" element={<Auth><ResetPasswordContainer/></Auth>} />
-        <Route path="/workspaces" element={<div>Workspaces</div>} />
+        <Route path="/workspaces" element={<Workspaces/>} />
         <Route path="/" element={<div>Home</div>} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
       <Toaster />
+      </AppContextProvider>
     </QueryClientProvider>
   );
 }

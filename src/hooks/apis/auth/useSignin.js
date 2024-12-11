@@ -15,6 +15,7 @@ function useSignin() {
     onSuccess : (data) => {
         console.log("Signined in Successfully", data);
         localStorage.setItem("access-token", data?.data?.token);
+        localStorage.setItem("user", JSON.stringify(data?.data?.user));
         toast({
             title: "Signined in Successfully",
             description: "You will be redirected to workspaces page in a few seconds",
