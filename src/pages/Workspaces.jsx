@@ -2,7 +2,7 @@
 import AvatarMenu from "@/components/atoms/AvatarMenu";
 import DatabaseError from "@/components/organisms/errors/DatabaseError";
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
-import useGetUserWorkspace from "@/hooks/apis/useGetUserWorkspace";
+import useGetUserWorkspace from "@/hooks/apis/workspaces/useGetUserWorkspace";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
 
