@@ -1,4 +1,5 @@
 
+import AvatarMenu from "@/components/atoms/AvatarMenu";
 import DatabaseError from "@/components/organisms/errors/DatabaseError";
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import useGetUserWorkspace from "@/hooks/apis/useGetUserWorkspace";
@@ -24,6 +25,7 @@ function Workspaces() {
   }
 
   return <div>
+    <AvatarMenu/>
     {isSuccess && workspacesData?.data?.map(workspace => (
       <div key={workspace._id}>{workspace.name}</div>
     ))}
