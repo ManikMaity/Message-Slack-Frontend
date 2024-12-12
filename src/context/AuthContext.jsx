@@ -6,16 +6,23 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({
     user: null,
     token: null,
+    loading : true
   });
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
     const token = localStorage.getItem("access-token");
-    if (userData) {
+    if (userData && token) {
       setAuth({
         user: JSON.parse(userData),
         token,
+        loading : false
       });
+    }
+    else {
+      setAuth(
+        {...auth, loading : false}
+      );
     }
   }, []);
 

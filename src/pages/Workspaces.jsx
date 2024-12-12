@@ -1,7 +1,6 @@
-import { useContext } from "react";
 
 import DatabaseError from "@/components/organisms/errors/DatabaseError";
-import AuthContext from "@/context/authContext";
+import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import useGetUserWorkspace from "@/hooks/apis/useGetUserWorkspace";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
@@ -9,8 +8,7 @@ import { getErrorMessage } from "@/utils/getErrorMessage";
 function Workspaces() {
   const { workspacesData, isError, isLoading, isSuccess, refetch, error } =
     useGetUserWorkspace();
-
-    const {auth} = useContext(AuthContext);
+    const {auth} = useAuthContext();
     console.log(auth);
 
   console.log(error, "error in workspaces");
