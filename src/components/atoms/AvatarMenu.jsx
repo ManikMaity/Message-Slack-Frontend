@@ -10,9 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
+import useLogout from "@/hooks/apis/useLogout";
+import { Button } from "../ui/button";
 
 function AvatarMenu() {
   const { auth } = useAuthContext();
+  const {logoutFn} = useLogout();
   console.log(auth);
 
   return (
@@ -34,9 +37,11 @@ function AvatarMenu() {
           <Settings2 />
           <p>Settings</p>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="p-0 mt-2">
+          <Button className="w-full" onClick={logoutFn}>
           <LogOutIcon />
           <p>Logout</p>
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
