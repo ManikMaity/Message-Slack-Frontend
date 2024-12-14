@@ -1,4 +1,4 @@
-import { LogOutIcon, Settings2, User2 } from "lucide-react";
+import { LogOutIcon, Pencil, Settings2, User2 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -12,11 +12,12 @@ import {
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import useLogout from "@/hooks/apis/useLogout";
 import { Button } from "../ui/button";
+import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceContext";
 
 function AvatarMenu() {
   const { auth } = useAuthContext();
+  const {setOpenCreateModal} = useCreateWorkspaceContext();
   const {logoutFn} = useLogout();
-  console.log(auth);
 
   return (
     <DropdownMenu>
@@ -24,7 +25,7 @@ function AvatarMenu() {
         <Avatar className="hover:opacity-50 border-2 size-10 cursor-pointer dark:border-white">
           <AvatarImage src={auth?.user?.avatar} />
           <AvatarFallback>
-            {auth?.user?.username[0].toUpperCase() || <User2 />}
+            {auth?.user?.username[0]?.toUpperCase() || <User2 />}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -33,6 +34,10 @@ function AvatarMenu() {
           {auth?.user?.username || "My Account"}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={() => setOpenCreateModal(true)}>
+          <Pencil/>
+          <p>Create a Workspace</p>
+        </DropdownMenuItem>
         <DropdownMenuItem>
           <Settings2 />
           <p>Settings</p>

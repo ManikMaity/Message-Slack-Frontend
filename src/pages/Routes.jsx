@@ -7,6 +7,8 @@ import ResetPasswordContainer from "@/components/organisms/forgetPassword/ResetP
 import Auth from "@/pages/auth/Auth";
 import NotFound from "@/pages/NotFound";
 import Workspaces from "@/pages/Workspaces";
+
+import Home from "./Home";
 import PrivateRoute from "./PrivateRoute";
 
 export function AppRoutes() {
@@ -47,7 +49,7 @@ export function AppRoutes() {
       <Route element={<PrivateRoute />}>
         <Route path="/workspaces" element={<Workspaces />} />
       </Route>
-      <Route path="/" element={<div>Home</div>} />
+      <Route path="/" element={<Home/>} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

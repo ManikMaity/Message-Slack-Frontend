@@ -14,14 +14,14 @@ export async function getAllUserWorkspaces() {
   }
 }
 
-export async function createWorkspace({ name, description, imageUrl }) {
+export async function createWorkspace({ name, description, imageUrl = null }) {
   try {
     const response = await axios.post(
       "/workspace/create",
       {
         name,
         description,
-        image: imageUrl,
+        image: imageUrl ?? "https://firebasestorage.googleapis.com/v0/b/opendoor-db7d9.appspot.com/o/pexels-hillaryfox-1595385.jpg?alt=media&token=f6237fb3-c078-4ba8-b838-6a4629c4abcc",
       },
       {
         headers: {
@@ -30,7 +30,7 @@ export async function createWorkspace({ name, description, imageUrl }) {
       }
     );
 
-    return response.data;
+    return response.data?.data;
   } catch (error) {
     console.log("Get User All Workspace error", error);
     throw error.response.data;

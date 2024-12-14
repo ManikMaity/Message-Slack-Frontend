@@ -14,8 +14,8 @@ function useCreateWorkspace() {
   } = useMutation({
     mutationFn: createWorkspace,
     onSuccess: (data) => {
-      console.log("Successfully created workspace", data);
       toast({
+        title: `${data?.name} workspace created`,
         description: "Successfully created workspace",
         type: "success",
       });
