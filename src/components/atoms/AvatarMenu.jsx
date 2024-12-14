@@ -10,9 +10,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
-import useLogout from "@/hooks/apis/useLogout";
-import { Button } from "../ui/button";
 import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceContext";
+import useLogout from "@/hooks/apis/useLogout";
+
+import { Button } from "../ui/button";
 
 function AvatarMenu() {
   const { auth } = useAuthContext();

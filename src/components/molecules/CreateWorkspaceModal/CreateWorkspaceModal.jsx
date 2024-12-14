@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,11 +15,9 @@ import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceCo
 import useCreateWorkspace from "@/hooks/apis/workspaces/useCreateWorkspace";
 
 import Spinner from "../Spinner";
-import { useNavigate } from "react-router-dom";
 
 export function CreateWorkspaceModal() {
-
-  const navigator  = useNavigate();
+  const navigator = useNavigate();
   const { openCreateModal, setOpenCreateModal } = useCreateWorkspaceContext();
   const [workspaceData, setWorkspaceData] = useState({
     name: "",
@@ -26,17 +25,19 @@ export function CreateWorkspaceModal() {
   });
   const [image, setImage] = useState(null);
   const { createWorkspaceMutateAsync, isPending } = useCreateWorkspace();
-  
+
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-      const data = await createWorkspaceMutateAsync({...workspaceData, image});
+      const data = await createWorkspaceMutateAsync({
+        ...workspaceData,
+        image,
+      });
       setWorkspaceData({ name: "", description: "" });
       setImage(null);
       setOpenCreateModal(false);
       navigator(`/workspace/${data?._id}`);
-    }
-    catch (error) {
+    } catch (error) {
       console.log("Error while creating workspace", error);
     }
   }
@@ -89,7 +90,7 @@ export function CreateWorkspaceModal() {
             placeholder="Enter workspace description"
           />
           <Button disabled={isPending} className="w-full" type="submit">
-           {isPending ? <Spinner/> : "Create Workspace"}
+            {isPending ? <Spinner /> : "Create Workspace"}
           </Button>
         </form>
       </DialogContent>

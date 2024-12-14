@@ -9,6 +9,7 @@ function Home() {
   const { workspacesData, isError, isLoading, isSuccess, refetch, error } =
   useGetUserWorkspace();
   const {auth} = useAuthContext();
+  console.log(auth);
 
 
 if (isError || isLoading) {
