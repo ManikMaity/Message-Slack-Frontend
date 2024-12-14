@@ -6,10 +6,11 @@ import ForgetPasswordContainer from "@/components/organisms/forgetPassword/Forge
 import ResetPasswordContainer from "@/components/organisms/forgetPassword/ResetPasswordContainer";
 import Auth from "@/pages/auth/Auth";
 import NotFound from "@/pages/NotFound";
-import Workspaces from "@/pages/Workspaces";
+import Workspaces from "@/pages/workspace/Workspaces";
 
 import Home from "./Home";
 import PrivateRoute from "./PrivateRoute";
+import Workspace from "./workspace/Workspace";
 
 export function AppRoutes() {
   return (
@@ -48,6 +49,7 @@ export function AppRoutes() {
       />
       <Route element={<PrivateRoute />}>
         <Route path="/workspaces" element={<Workspaces />} />
+        <Route path="/workspace/:id" element={<Workspace/>}/>
       </Route>
       <Route path="/" element={<Home/>} />
       <Route path="/*" element={<NotFound />} />
