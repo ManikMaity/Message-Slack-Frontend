@@ -9,6 +9,7 @@ function useGetWorkspaceData(id) {
     isError,
     isSuccess,
     error,
+    refetch
   } = useQuery({
     queryKey: ["workspace-data", id],
     queryFn: () => getWorkspaceData(id),
@@ -21,6 +22,7 @@ function useGetWorkspaceData(id) {
     isError,
     isSuccess,
     error,
+    refetch
   };
 }
 

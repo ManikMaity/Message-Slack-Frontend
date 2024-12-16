@@ -47,7 +47,7 @@ export function CreateWorkspaceModal() {
       open={openCreateModal}
       onOpenChange={() => setOpenCreateModal(false)}
     >
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[95%] max-w-[425px] p-4 rounded-md sm:p-6">
         <DialogHeader>
           <DialogTitle>Create a new Workspace</DialogTitle>
           <DialogDescription>

@@ -1,5 +1,4 @@
 import AvatarMenu from "@/components/atoms/AvatarMenu";
-import CreateWorkspaceModal from "@/components/molecules/CreateWorkspaceModal/CreateWorkspaceModal";
 import DatabaseError from "@/components/organisms/errors/DatabaseError";
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import useGetUserWorkspace from "@/hooks/apis/workspaces/useGetUserWorkspace";
@@ -27,7 +26,6 @@ return <div>
   {isSuccess && workspacesData?.data?.map(workspace => (
     <div key={workspace._id}>{workspace.name}</div>
   ))}
-  <CreateWorkspaceModal/>
 </div>;
 }
 
