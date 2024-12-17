@@ -15,6 +15,9 @@ export default {
         slack: {
           DEFAULT: "#5c3B58",
           dark: "#481349",
+          dark500: "#3f1140",
+          dark600: "#300d30",
+
         },
         card: {
           DEFAULT: "hsl(var(--card))",

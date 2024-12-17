@@ -41,6 +41,13 @@ function ChangeWorkspaceBtn() {
             </p>
           </AvatarFallback>
         </Avatar>}
+        {isLoading && <Avatar className="hover:opacity-50 cursor-pointer rounded-md mx-auto dark:border-white">
+          <AvatarFallback className="rounded-md">
+            <p className="font-bold">
+              <Workflow />
+            </p>
+          </AvatarFallback>
+        </Avatar>}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="m-1">
         <DropdownMenuLabel>Workspaces</DropdownMenuLabel>
@@ -53,7 +60,7 @@ function ChangeWorkspaceBtn() {
           className="h-44 overflow-y-scroll"
         >
           {workspacesData?.data?.map((workspace) => (
-            <DropdownMenuRadioItem value={workspace._id} key={workspace._id}>
+            <DropdownMenuRadioItem className="cursor-pointer" value={workspace._id} key={workspace._id}>
               <p>{workspace.name}</p>
             </DropdownMenuRadioItem>
           ))}
