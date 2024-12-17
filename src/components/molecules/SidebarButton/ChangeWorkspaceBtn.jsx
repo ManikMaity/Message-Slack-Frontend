@@ -1,6 +1,6 @@
 import { DropdownMenuRadioGroup } from "@radix-ui/react-dropdown-menu";
 import { Workflow } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import ChangeWorkspaceListLoader from "@/components/atoms/SkeletonLoaders/ChangeWorkspaceListLoader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -13,29 +13,34 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useGetUserWorkspace from "@/hooks/apis/workspaces/useGetUserWorkspace";
+import { getWorkspaceFromArray } from "@/utils/getWorkspaceFromArray";
 
-function ChangeWorkspaceBtn({ currentWorkspace }) {
+function ChangeWorkspaceBtn() {
   const { workspacesData, isLoading, isError, isSuccess } =
     useGetUserWorkspace();
+  const {id} = useParams();
   const navigate = useNavigate();
+  console.log(workspacesData, "workspacesData");
   const handleWorkspaceChange = (value) => {
     navigate(`/workspace/${value}`);
   };
+  
+  
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <Avatar className="hover:opacity-50 cursor-pointer rounded-md mx-auto dark:border-white">
-          <AvatarImage className="object-cover" src={currentWorkspace?.image} />
+       {isSuccess && <Avatar className="hover:opacity-50 cursor-pointer rounded-md mx-auto dark:border-white">
+          <AvatarImage className="object-cover" src={getWorkspaceFromArray(workspacesData?.data, id)?.image} />
           <AvatarFallback className="rounded-md">
             <p className="font-bold">
-              {currentWorkspace?.name
+              {getWorkspaceFromArray(workspacesData?.data, id)?.name
                 ?.split(" ")
                 ?.map((word) => word[0]?.toUpperCase())
                 ?.join("") || <Workflow />}
             </p>
           </AvatarFallback>
-        </Avatar>
+        </Avatar>}
       </DropdownMenuTrigger>
       <DropdownMenuContent className="m-1">
         <DropdownMenuLabel>Workspaces</DropdownMenuLabel>
@@ -43,7 +48,7 @@ function ChangeWorkspaceBtn({ currentWorkspace }) {
         {isError && <p className="text-red-500 p-2 text-sm">Something went wrong</p>}
         {isLoading && <ChangeWorkspaceListLoader/>}
         {isSuccess &&<DropdownMenuRadioGroup
-          value={currentWorkspace?._id}
+          value={id}
           onValueChange={handleWorkspaceChange}
           className="h-44 overflow-y-scroll"
         >

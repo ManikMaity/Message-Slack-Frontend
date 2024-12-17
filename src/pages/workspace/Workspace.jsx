@@ -6,10 +6,8 @@ import WorkSpaceLayout from "./Layout";
 
 function Workspace() {
   const { id } = useParams();
-  const { workspaceData, error } = useGetWorkspaceData(id);
-  console.log(workspaceData, error);
 
-  return <WorkSpaceLayout workspaceData={workspaceData} />;
+  return <WorkSpaceLayout/>;
 }
 
 export default Workspace;

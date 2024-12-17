@@ -13,14 +13,14 @@ import SidebarButton from "@/components/molecules/SidebarButton/SidebarButton";
 import { Button } from "@/components/ui/button";
 import useSidebarContext from "@/hooks/apis/context/useSidebarContext";
 
-function WorkspaceSidebar({workspaceData}) {
+function WorkspaceSidebar() {
 
   const { setMainSidebarOpen } = useSidebarContext();
 
   return (
     <aside className="w-full h-full text-sm dark:bg-slate-900 bg-slack-dark flex flex-col justify-between items-center p-2 pt-[10px]">
       <div className="flex flex-col gap-y-4 ">
-        <ChangeWorkspaceBtn currentWorkspace={workspaceData}/>
+        <ChangeWorkspaceBtn/>
         <SidebarButton IconEle={Home} label="Home" />
         <SidebarButton IconEle={MessageSquare} label="DMS" />
         <SidebarButton IconEle={Bell} label="Activity" />
