@@ -44,7 +44,7 @@ function AvatarMenu() {
           <p>Settings</p>
         </DropdownMenuItem>
         <DropdownMenuItem className="p-0 mt-2">
-          <Button className="w-full" onClick={logoutFn}>
+          <Button variant="error" className="w-full" onClick={logoutFn}>
           <LogOutIcon />
           <p>Logout</p>
           </Button>

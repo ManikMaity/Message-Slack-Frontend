@@ -31,12 +31,12 @@ function WorkspacePanelHeader({ workspaceData }) {
   });
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center md:flex-row flex-col justify-between">
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none hover:bg-accent/80 rounded-md">
           <div>
             <div className="flex items-center py-1 px-2">
-              <p className=" text-base font-bold">{workspaceData?.name}</p>
+              <p className="text-sm md:text-base  font-bold">{workspaceData?.name}</p>
               <ChevronDown />
             </div>
           </div>
@@ -85,7 +85,7 @@ function WorkspacePanelHeader({ workspaceData }) {
             className="w-64"
           ></DropdownMenuContent>
         </DropdownMenu>
-        <Button size="sm" variant="transparent"><SquarePen className="h-4 w-4"/></Button>
+        <Button size="sm" variant="transparent"><SquarePen className="text-white h-4 w-4"/></Button>
       </div>
     </div>
   );

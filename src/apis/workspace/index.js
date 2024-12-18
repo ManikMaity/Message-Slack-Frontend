@@ -1,5 +1,7 @@
 import axios from "@/config/axios.config";
 
+const slack_token = localStorage.getItem("access-token");
+
 export async function getAllUserWorkspaces() {
   try {
     const response = await axios.get("/workspace", {
@@ -50,5 +52,33 @@ export async function getWorkspaceData(id) {
     return response?.data?.data;
   } catch (error) {
     throw error.response.data;
+  }
+}
+
+export async function deleteWorkspace(id) {
+  try {
+    const response = await axios.delete(`/workspace/${id}`, {
+      headers: {
+        slack_token: localStorage.getItem("access-token"),
+      },
+    });
+
+    return response?.data?.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+}
+
+export async function updateWorkspace(id, data) {
+  try {
+    const response = await axios.post(`/workspace/update/${id}`, data, {
+      headers: {
+        slack_token,
+      },
+    });
+
+    return response?.data?.data;
+  } catch (err) {
+    throw err.response.data;
   }
 }
