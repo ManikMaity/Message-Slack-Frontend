@@ -1,8 +1,9 @@
+import { useMutation } from "@tanstack/react-query";
+import React from "react";
+
 import { updateWorkspace } from "@/apis/workspace";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
-import { useMutation } from "@tanstack/react-query";
-import React from "react";
 
 function useUpdateWorkspace() {
   const {mutateAsync: updateWorkspaceMutateAsync, isSuccess, isPending, isError, error} = useMutation({

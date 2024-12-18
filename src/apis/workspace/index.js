@@ -69,7 +69,7 @@ export async function deleteWorkspace(id) {
   }
 }
 
-export async function updateWorkspace(id, data) {
+export async function updateWorkspace({id, data}) {
   try {
     const response = await axios.post(`/workspace/update/${id}`, data, {
       headers: {
