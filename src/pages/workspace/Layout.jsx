@@ -1,10 +1,10 @@
 import { SidebarOpen } from "lucide-react";
 
+import WorkspaceContentLayout from "@/components/organisms/workspace/WorkspaceContentLayout";
+import WorkspaceNavbar from "@/components/organisms/workspace/WorkspaceNavbar";
 import WorkspaceSidebar from "@/components/organisms/workspace/WorkspaceSidebar";
 import { Button } from "@/components/ui/button";
 import useSidebarContext from "@/hooks/apis/context/useSidebarContext";
-import WorkspaceNavbar from "@/components/organisms/workspace/WorkspaceNavbar";
-import WorkspaceContentLayout from "@/components/organisms/workspace/WorkspaceContentLayout";
 
 function WorkSpaceLayout() {
   const { mainSidebarOpen, setMainSidebarOpen } = useSidebarContext();

@@ -8,7 +8,7 @@ import DatabaseError from "../errors/DatabaseError";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
-  const { workspaceData, isLoading, isSuccess, isError, error, refetch } =
+  const { workspaceData, isLoading, isError, error, refetch } =
     useGetWorkspaceData(id);
   console.log(workspaceData, "WorkspaceContentPanel");
   if (isLoading) {
