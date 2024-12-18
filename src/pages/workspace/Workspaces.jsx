@@ -1,35 +1,29 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import AvatarMenu from "@/components/atoms/AvatarMenu";
-import DatabaseError from "@/components/organisms/errors/DatabaseError";
-import useAuthContext from "@/hooks/apis/context/useAuthContext";
+import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceContext";
 import useGetUserWorkspace from "@/hooks/apis/workspaces/useGetUserWorkspace";
-import { getErrorMessage } from "@/utils/getErrorMessage";
-
 
 function Workspaces() {
-  const { workspacesData, isError, isLoading, isSuccess, refetch, error } =
+  const { workspacesData, isError, isLoading } =
     useGetUserWorkspace();
-    const {auth} = useAuthContext();
-    console.log(auth);
+  const navigate = useNavigate();
+  const { setOpenCreateModal } = useCreateWorkspaceContext();
 
-  console.log(error, "error in workspaces");
+  useEffect(() => {
+    if (isLoading || isError) return;
+    if (workspacesData?.data?.length === 0 || !workspacesData?.data){
+      console.log("No workspaces found, Creating one");
+      setOpenCreateModal(true);
+    }
+    else {
+      navigate(`/workspace/${workspacesData?.data[0]?._id}`);
+    }
 
-  if (isError || isLoading) {
-    return (
-      <DatabaseError
-        onClickFn={refetch}
-        errorTitle={error?.message}
-        errorMessage={getErrorMessage(error)}
-      />
-    );
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workspacesData, isLoading, isError]);
 
-  return <div>
-    <AvatarMenu/>
-    {isSuccess && workspacesData?.data?.map(workspace => (
-      <div key={workspace._id}>{workspace.name}</div>
-    ))}
-  </div>;
+  return <div>Wokspaces</div>;
 }
 
 export default Workspaces;

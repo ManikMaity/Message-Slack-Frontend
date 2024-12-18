@@ -3,8 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteWorkspace } from "@/apis/workspace";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
+import { useNavigate } from "react-router-dom";
 
 function useDeleteWorkspace() {
+
+  const navigator = useNavigate();
+
   const {
     mutateAsync: deleteWorkspaceMutateAsync,
     isSuccess,
@@ -20,6 +24,8 @@ function useDeleteWorkspace() {
         description: "Successfully deleted workspace",
         type: "success",
       });
+
+      navigator("/workspaces");
     },
     onError: (error) => {
       console.log("Error while deleting workspace", error);

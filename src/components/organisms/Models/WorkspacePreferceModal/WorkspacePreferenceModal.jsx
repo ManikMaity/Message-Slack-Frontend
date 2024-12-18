@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import useModalInitialValueContext from "@/hooks/apis/context/useModalInitialValueContext";
 import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 import useDeleteWorkspace from "@/hooks/apis/workspaces/useDeleteWorkspace";
+import useUpdateWorkspace from "@/hooks/apis/workspaces/useUpdateWorkspace";
 
 import WorkspacePreferenceModalContent from "./WorkspacePreferenceModalContent";
-import useUpdateWorkspace from "@/hooks/apis/workspaces/useUpdateWorkspace";
 
 function WorkspacePreferenceModal() {
   const { workspacePreferencesVlaue } = useModalInitialValueContext();
