@@ -8,9 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-function DatabaseError({errorTitle, errorMessage, onClickFn = () => {console.log("clicked");}}) {
+function DatabaseError({errorTitle, errorMessage, styleObj = {}, onClickFn = () => {console.log("clicked");}}) {
   return (
-    <Card className="w-full max-w-xl mx-auto">
+    <Card style={styleObj} className="w-full max-w-xl mx-auto">
       <CardHeader>
         <CardTitle className="text-red-500 text-2xl font-bold">{errorTitle || "Server Error"}</CardTitle>
         <CardDescription>{errorMessage || "An unespected error has occured."}</CardDescription>
