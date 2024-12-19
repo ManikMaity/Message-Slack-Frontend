@@ -1,15 +1,15 @@
+import { EditIcon, Trash, X } from "lucide-react";
+
 import Spinner from "@/components/molecules/Spinner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { EditIcon, Trash } from "lucide-react";
 
 function WorkspacePreferenceModalContent({
   wsPreferenceModalOpen,
@@ -22,12 +22,18 @@ function WorkspacePreferenceModalContent({
   deleteWorkspacePending,
   handleWorkspaceNameChange,
   updateWorkspacePending,
+  ConfirmAlert
 }) {
   return (
     <Dialog
       open={wsPreferenceModalOpen}
-      onOpenChange={() => setWsPreferenceModalOpen(false)}
+      onOpenChange={() => {
+        setWsPreferenceModalOpen(false);
+        setShowNameInput(false);
+        setTimeout(() => (document.body.style.pointerEvents = ""), 100);
+      }}
     >
+      <ConfirmAlert/>
       <DialogContent className="max-w-[600px] w-[95%]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Prefrences</DialogTitle>
@@ -45,13 +51,19 @@ function WorkspacePreferenceModalContent({
                 className="p-1"
                 variant="outline"
               >
-                <EditIcon />
+                {showNameInput? <X/> : <EditIcon />}
               </Button>
             </div>
             {showNameInput ? (
               <form onSubmit={handleWorkspaceNameChange} className="flex gap-2 mt-2">
                 <Input
                   size="sm"
+                  type="text"
+                  required
+                  placeholder="Workspace Name"
+                  minLength={3}
+                  maxLength={50}
+                  autoFocus
                   defaultValue={values?.name}
                   onChange={(e) =>
                     setValues({ ...values, name: e.target.value })
@@ -73,7 +85,6 @@ function WorkspacePreferenceModalContent({
             {deleteWorkspacePending ? <Spinner /> : <p>Delete {values?.name}</p>}
           </Button>
         </div>
-        <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
   );

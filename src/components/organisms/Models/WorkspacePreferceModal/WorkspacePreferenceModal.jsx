@@ -6,10 +6,12 @@ import useDeleteWorkspace from "@/hooks/apis/workspaces/useDeleteWorkspace";
 import useUpdateWorkspace from "@/hooks/apis/workspaces/useUpdateWorkspace";
 
 import WorkspacePreferenceModalContent from "./WorkspacePreferenceModalContent";
+import useConfirm from "@/hooks/useConfirm";
 
 function WorkspacePreferenceModal() {
   const { workspacePreferencesVlaue } = useModalInitialValueContext();
   const [values, setValues] = useState(workspacePreferencesVlaue);
+  const {confirm, ConfirmAltert} = useConfirm({title : "Are you sure you want to delete this workspace?", description: "This action cannot be undone. Are you sure you want to continue?"});
 
   const { wsPreferenceModalOpen, setWsPreferenceModalOpen } =
   useModalOpenContext();
@@ -24,15 +26,18 @@ function WorkspacePreferenceModal() {
   }, [workspacePreferencesVlaue]);
 
   const deleteWorkspace = async () => {
-    if (!confirm("Are you sure you want to delete this workspace?")) {
-      return;
-    }
+    const ok = await confirm();
+    if (!ok) return;
     await deleteWorkspaceMutateAsync(values?._id);
     setWsPreferenceModalOpen(false);
   };
 
   async function handleWorkspaceNameChange(e) {
     e.preventDefault();
+    if (values?.name === workspacePreferencesVlaue?.name) {
+      setShowNameInput(false);
+      return;
+    }
     const resposne = await updateWorkspaceMutateAsync({id : values?._id, data : {name : values?.name || workspacePreferencesVlaue?.name}});
     console.log(resposne, "update workspace name response");
     setShowNameInput(false);
@@ -50,6 +55,7 @@ function WorkspacePreferenceModal() {
       deleteWorkspacePending={isPending}
       handleWorkspaceNameChange={handleWorkspaceNameChange}
       updateWorkspacePending={updateWorkspacePending}
+      ConfirmAlert={ConfirmAltert}
     />
   );
 }
