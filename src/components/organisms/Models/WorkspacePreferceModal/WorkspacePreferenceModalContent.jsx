@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -30,7 +31,6 @@ function WorkspacePreferenceModalContent({
       onOpenChange={() => {
         setWsPreferenceModalOpen(false);
         setShowNameInput(false);
-        setTimeout(() => (document.body.style.pointerEvents = ""), 100);
       }}
     >
       <ConfirmAlert/>
@@ -85,6 +85,7 @@ function WorkspacePreferenceModalContent({
             {deleteWorkspacePending ? <Spinner /> : <p>Delete {values?.name}</p>}
           </Button>
         </div>
+        <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
   );

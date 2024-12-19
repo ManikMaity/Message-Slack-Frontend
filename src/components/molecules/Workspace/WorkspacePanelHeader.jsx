@@ -14,12 +14,11 @@ import useModalInitialValueContext from "@/hooks/apis/context/useModalInitialVal
 import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 
 function WorkspacePanelHeader({ workspaceData }) {
-
-  const {setWsPreferenceModalOpen} = useModalOpenContext();
+  const { setWsPreferenceModalOpen } = useModalOpenContext();
   const { setWorkspacePreferencesVlaue } = useModalInitialValueContext();
   useEffect(() => {
     setWorkspacePreferencesVlaue(workspaceData);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workspaceData]);
 
   const { auth } = useAuthContext();
@@ -36,7 +35,9 @@ function WorkspacePanelHeader({ workspaceData }) {
         <DropdownMenuTrigger className="outline-none hover:bg-accent/80 rounded-md">
           <div>
             <div className="flex items-center py-1 px-2">
-              <p className="text-sm md:text-base  font-bold">{workspaceData?.name}</p>
+              <p className="text-sm md:text-base  font-bold">
+                {workspaceData?.name}
+              </p>
               <ChevronDown />
             </div>
           </div>
@@ -65,10 +66,13 @@ function WorkspacePanelHeader({ workspaceData }) {
               <DropdownMenuItem>
                 Invite to {workspaceData?.name || "Workspace"}
               </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setWsPreferenceModalOpen(true)}>
+                Preferences
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator />
             </div>
           )}
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setWsPreferenceModalOpen(true)}>Preferences</DropdownMenuItem>
           <DropdownMenuItem>
             Leave {workspaceData?.name || "Workspace"}
           </DropdownMenuItem>
@@ -85,7 +89,9 @@ function WorkspacePanelHeader({ workspaceData }) {
             className="w-64"
           ></DropdownMenuContent>
         </DropdownMenu>
-        <Button size="sm" variant="transparent"><SquarePen className="text-white h-4 w-4"/></Button>
+        <Button size="sm" variant="transparent">
+          <SquarePen className="text-white h-4 w-4" />
+        </Button>
       </div>
     </div>
   );

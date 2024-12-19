@@ -1,10 +1,13 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createWorkspace } from "@/apis/workspace";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
 function useCreateWorkspace() {
+
+  const queryClient = useQueryClient();
+
   const {
     mutateAsync: createWorkspaceMutateAsync,
     isSuccess,
@@ -19,6 +22,8 @@ function useCreateWorkspace() {
         description: "Successfully created workspace",
         type: "success",
       });
+
+      queryClient.invalidateQueries(["workspaces"]);
     },
     onError: (error) => {
       console.log("Error while creating workspace", error);

@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { deleteWorkspace } from "@/apis/workspace";
 import { toast } from "@/hooks/use-toast";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function useDeleteWorkspace() {
 
   const navigator = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     mutateAsync: deleteWorkspaceMutateAsync,
@@ -24,7 +25,7 @@ function useDeleteWorkspace() {
         description: "Successfully deleted workspace",
         type: "success",
       });
-
+      queryClient.invalidateQueries(["workspaces"]);
       navigator("/workspaces");
     },
     onError: (error) => {
