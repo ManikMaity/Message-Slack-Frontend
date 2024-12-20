@@ -5,6 +5,9 @@ import WorkspacePanelHeader from "@/components/molecules/Workspace/WorkspacePane
 import useGetWorkspaceData from "@/hooks/apis/workspaces/useGetWorkspaceData";
 
 import DatabaseError from "../errors/DatabaseError";
+import SidebarChannelButton from "@/components/atoms/Channels/SidebarChannelButton";
+import { Hash } from "lucide-react";
+import WorkspaceContentPanelSec from "@/components/molecules/Workspace/WorkspaceContentPanelSec/WorkspaceContentPanelSec";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
@@ -34,6 +37,20 @@ function WorkspaceContentPanel() {
 
   return <div className="p-2 text-white">
     <WorkspacePanelHeader workspaceData={workspaceData}/>
+    <div className="flex flex-col gap-2 mt-3">
+      <WorkspaceContentPanelSec label="Channels">
+      {workspaceData?.channels?.map((channel) => (
+        <SidebarChannelButton
+          key={channel._id}
+          label={channel.name}
+          Icon={Hash}
+          channelId={channel._id}
+        />
+      ))}
+      </WorkspaceContentPanelSec>
+      
+      <SidebarChannelButton label="General" Icon={Hash} channelId="general" varient="active"/>
+    </div>
   </div>;
 }
 

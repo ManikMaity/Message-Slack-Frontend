@@ -5,13 +5,15 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import CombinedContext from "@/utils/CombinedContext";
 
 import { ModalInitialValuesProvider } from "./ModalInitialValuesContext";
+import { WorkspaceIdProvider } from "./WorkspaceIdContext";
 
 const CombinedContextProvier = CombinedContext(
   AuthProvider,
   CreateWorkspaceProvider,
   SidebarProvider,
   ModalOpenProvider,
-  ModalInitialValuesProvider
+  ModalInitialValuesProvider,
+  WorkspaceIdProvider
 );
 
 function AppContextProvider({ children }) {

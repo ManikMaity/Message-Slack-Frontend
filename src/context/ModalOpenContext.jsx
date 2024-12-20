@@ -5,7 +5,7 @@ const ModalOpenContext = createContext(null);
 export function ModalOpenProvider({ children }) {
 
   const [wsPreferenceModalOpen, setWsPreferenceModalOpen] = useState(false);
-  const [createChannelModalOpen, setCreateChannelModalOpen] = useState(true);
+  const [createChannelModalOpen, setCreateChannelModalOpen] = useState(false);
 
   return (
     <ModalOpenContext.Provider

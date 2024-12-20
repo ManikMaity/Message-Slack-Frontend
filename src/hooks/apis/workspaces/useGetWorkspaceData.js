@@ -11,7 +11,7 @@ function useGetWorkspaceData(id) {
     error,
     refetch
   } = useQuery({
-    queryKey: ["workspace-data", id],
+    queryKey: [`workspace-data-${id}`, id],
     queryFn: () => getWorkspaceData(id),
     staleTime: 1000 * 60 * 10, // 10 minutes
   });

@@ -50,6 +50,7 @@ export function AppRoutes() {
       <Route element={<PrivateRoute />}>
         <Route path="/workspaces" element={<Workspaces />} />
         <Route path="/workspace/:id" element={<Workspace/>}/>
+        <Route path="/workspace/:id/channel/:channelId" element={<div>Channel</div>}/>
       </Route>
       <Route path="/" element={<Home/>} />
       <Route path="/*" element={<NotFound />} />

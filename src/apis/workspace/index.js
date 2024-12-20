@@ -69,13 +69,34 @@ export async function deleteWorkspace(id) {
   }
 }
 
-export async function updateWorkspace({id, data}) {
+export async function updateWorkspace({ id, data }) {
   try {
     const response = await axios.post(`/workspace/update/${id}`, data, {
       headers: {
         slack_token,
       },
     });
+
+    return response?.data?.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+}
+
+export async function addChannelToWorkspace({ channelName, workspaceId }) {
+  try {
+    const response = await axios.put(
+      "/workspace/add-channel",
+      {
+        channelName,
+        workspaceId,
+      },
+      {
+        headers: {
+          slack_token,
+        },
+      }
+    );
 
     return response?.data?.data;
   } catch (err) {
