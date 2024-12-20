@@ -30,7 +30,7 @@ function WorkspacePanelHeader({ workspaceData }) {
   });
 
   return (
-    <div className="flex items-center md:flex-row flex-col justify-between">
+    <div className="flex md:items-center md:flex-row flex-col justify-between">
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none hover:bg-accent/80 rounded-md">
           <div>
@@ -78,7 +78,7 @@ function WorkspacePanelHeader({ workspaceData }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div className="flex gap-2">
+      <div className="flex gap-2 justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger className="outline-none hover:bg-accent/80 rounded-md p-2">
             <ListFilterIcon className="h-4 w-4" />
