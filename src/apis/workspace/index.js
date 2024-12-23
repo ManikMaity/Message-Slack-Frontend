@@ -103,3 +103,18 @@ export async function addChannelToWorkspace({ channelName, workspaceId }) {
     throw err.response.data;
   }
 }
+
+export async function changeWorkspaceJoinCode({workspaceId}){
+  try {
+    const response = await axios.put(`/workspace/change-joinCode/${workspaceId}`, {}, {
+      headers: {
+        slack_token,
+      },
+    });
+
+    return response?.data?.data;
+  }
+  catch (err) {
+    throw err.response.data;
+  }
+}

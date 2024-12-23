@@ -5,7 +5,7 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import CombinedContext from "@/utils/CombinedContext";
 
 import { ModalInitialValuesProvider } from "./ModalInitialValuesContext";
-import { WorkspaceIdProvider } from "./WorkspaceIdContext";
+import { WorkspaceDataContextProvider } from "./WorkspaceDataContext";
 
 const CombinedContextProvier = CombinedContext(
   AuthProvider,
@@ -13,7 +13,7 @@ const CombinedContextProvier = CombinedContext(
   SidebarProvider,
   ModalOpenProvider,
   ModalInitialValuesProvider,
-  WorkspaceIdProvider
+  WorkspaceDataContextProvider
 );
 
 function AppContextProvider({ children }) {

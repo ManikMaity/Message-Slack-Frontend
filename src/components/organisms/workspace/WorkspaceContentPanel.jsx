@@ -11,17 +11,33 @@ import WorkspaceContentPanelSec from "@/components/molecules/Workspace/Workspace
 import { Button } from "@/components/ui/button";
 import useCreateChannelModalContext from "@/hooks/apis/context/useCreateChannelModalContext";
 import MemberWorkspacePannelBtn from "@/components/atoms/MemberWorkspacePannelBtn/MemberWorkspacePannelBtn";
+import { useEffect } from "react";
+import useWorkspaceDataContext from "@/hooks/apis/context/useWorkspaceDataContext";
+import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
   const { workspaceData, isLoading, isError, error, refetch } =
     useGetWorkspaceData(id);
-    console.log(workspaceData);
-    const {setCreateChannelModalOpen} = useCreateChannelModalContext();
+  const { setWorkspaceData } = useWorkspaceDataContext();
 
-    function addChannelHandler() {
-      setCreateChannelModalOpen(true);
-    }
+  useEffect(() => {
+    console.log(workspaceData, "WorkspaceContentPanel rerender")
+    if (!workspaceData) return;
+    setWorkspaceData(workspaceData);
+  }, [id, workspaceData]);
+
+  console.log(workspaceData);
+  const { setCreateChannelModalOpen } = useCreateChannelModalContext();
+  const {setWorkspaceLinkModalOpen} = useModalOpenContext();
+
+  function addChannelHandler() {
+    setCreateChannelModalOpen(true);
+  }
+
+  function addMemberHandler() {
+    setWorkspaceLinkModalOpen(true);
+  }
 
   if (isLoading) {
     return (
@@ -44,40 +60,63 @@ function WorkspaceContentPanel() {
     );
   }
 
-  return <div className="p-2 text-white">
-    <WorkspacePanelHeader workspaceData={workspaceData}/>
-    <div className="flex flex-col gap-2 mt-3">
-      <WorkspaceContentPanelSec label="Channels" addButtonClickFn={addChannelHandler}>
-        <>
-      {workspaceData?.channels?.map((channel) => (
-        <SidebarChannelButton
-          key={channel._id}
-          label={channel.name}
-          Icon={Hash}
-          channelId={channel._id}
-        />        
-      ))}
-       <Button size="xs" onClick={addChannelHandler} className="justify-start px-2 py-1 text-white/50" variant="transparent">
-          <p className="p-0.5 rounded-sm bg-accent"><Plus /></p>
-          <span>Create Channel</span>
-        </Button>
-      </>
-      </WorkspaceContentPanelSec>
+  return (
+    <div className="p-2 text-white">
+      <WorkspacePanelHeader workspaceData={workspaceData} />
+      <div className="flex flex-col gap-2 mt-3">
+        <WorkspaceContentPanelSec
+          label="Channels"
+          addButtonClickFn={addChannelHandler}
+        >
+          <>
+            {workspaceData?.channels?.map((channel) => (
+              <SidebarChannelButton
+                key={channel._id}
+                label={channel.name}
+                Icon={Hash}
+                channelId={channel._id}
+              />
+            ))}
+            <Button
+              size="xs"
+              onClick={addChannelHandler}
+              className="justify-start px-2 py-1 text-white/50"
+              variant="transparent"
+            >
+              <p className="p-0.5 rounded-sm bg-accent">
+                <Plus />
+              </p>
+              <span>Create Channel</span>
+            </Button>
+          </>
+        </WorkspaceContentPanelSec>
 
-      <WorkspaceContentPanelSec label={"Members"} >
-        {workspaceData?.members?.map((member) => (
-          <MemberWorkspacePannelBtn
-            key={member._id}
-            name={member?.member?.username}
-            memberId={member?._id}
-            image={member?.member?.avatar}
-            role={member?.role}
-          />
-        ))}
-      </WorkspaceContentPanelSec>
-      
+        <WorkspaceContentPanelSec label={"Members"} addButtonClickFn={addMemberHandler}>
+          {workspaceData?.members?.map((member) => (
+            <MemberWorkspacePannelBtn
+              key={member._id}
+              name={member?.member?.username}
+              memberId={member?._id}
+              image={member?.member?.avatar}
+              role={member?.role}
+
+            />
+          ))}
+          <Button
+            size="xs"
+            className="justify-start px-2 py-1 text-white/50"
+            variant="transparent"
+            onClick={addMemberHandler}
+          >
+            <p className="p-0.5 rounded-sm bg-accent">
+              <Plus />
+            </p>
+            <span>Add Member</span>
+          </Button>
+        </WorkspaceContentPanelSec>
+      </div>
     </div>
-  </div>;
+  );
 }
 
 export default WorkspaceContentPanel;

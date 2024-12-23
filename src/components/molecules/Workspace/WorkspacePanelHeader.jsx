@@ -16,6 +16,7 @@ import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 function WorkspacePanelHeader({ workspaceData }) {
   const { setWsPreferenceModalOpen } = useModalOpenContext();
   const { setWorkspacePreferencesVlaue } = useModalInitialValueContext();
+  const {setWorkspaceLinkModalOpen} = useModalOpenContext();
   useEffect(() => {
     setWorkspacePreferencesVlaue(workspaceData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -24,7 +25,7 @@ function WorkspacePanelHeader({ workspaceData }) {
   const { auth } = useAuthContext();
   console.log(auth);
   const isAdmin = workspaceData?.members.find((member) => {
-    if (member?.member === auth?.user?._id && member.role === "admin") {
+    if (member?.member?._id === auth?.user?._id && member.role === "admin") {
       return member;
     }
   });
@@ -63,7 +64,7 @@ function WorkspacePanelHeader({ workspaceData }) {
           <DropdownMenuSeparator />
           {isAdmin && (
             <div>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setWorkspaceLinkModalOpen(true)}>
                 Invite to {workspaceData?.name || "Workspace"}
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => setWsPreferenceModalOpen(true)}>

@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import useCreateChannelModalContext from "@/hooks/apis/context/useCreateChannelModalContext";
 import useAddChannelToWorkspace from "@/hooks/apis/workspaces/useAddChannelToWorkspace";
-import useWorkspaceIdContext from "@/hooks/apis/context/useWorkspaceIdContext";
+import useWorkspaceDataContext from "@/hooks/apis/context/useWorkspaceDataContext";
 
 function CreateChannelModal() {
   const { createChannelModalOpen, setCreateChannelModalOpen } =
@@ -20,14 +20,14 @@ function CreateChannelModal() {
   const [channelName, setChannelName] = useState("");
 
   const {addChannelToWorkspaceMutateAsync, isPending} = useAddChannelToWorkspace();
-  const {workspaceId} = useWorkspaceIdContext();
+  const {workspaceData} = useWorkspaceDataContext();
 
   async function handleCreateChannelSubmit(e) {
     e.preventDefault();
     if (channelName.trim() === "") {
       return;
     }
-    await addChannelToWorkspaceMutateAsync({channelName, workspaceId});
+    await addChannelToWorkspaceMutateAsync({channelName, workspaceId : workspaceData?._id});
     setChannelName("");
     setCreateChannelModalOpen(false);
   }
