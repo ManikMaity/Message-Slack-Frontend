@@ -11,6 +11,7 @@ import Workspaces from "@/pages/workspace/Workspaces";
 import Home from "./Home";
 import PrivateRoute from "./PrivateRoute";
 import Workspace from "./workspace/Workspace";
+import JoinWorkspaceByCode from "./workspace/JoinWorkspaceByCode";
 
 export function AppRoutes() {
   return (
@@ -51,6 +52,7 @@ export function AppRoutes() {
         <Route path="/workspaces" element={<Workspaces />} />
         <Route path="/workspace/:id" element={<Workspace/>}/>
         <Route path="/workspace/:id/channel/:channelId" element={<div>Channel</div>}/>
+        <Route path="/workspace/join/:joinCode" element={<JoinWorkspaceByCode/>}/>
       </Route>
       <Route path="/" element={<Home/>} />
       <Route path="/*" element={<NotFound />} />

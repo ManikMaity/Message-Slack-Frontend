@@ -1,6 +1,7 @@
 import { Copy, RefreshCcw, ThumbsUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import Spinner from "@/components/molecules/Spinner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,7 +16,6 @@ import { FRONTEND_URL } from "@/config/clientConfig";
 import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 import useWorkspaceDataContext from "@/hooks/apis/context/useWorkspaceDataContext";
 import useChangeWorkspaceJoinCode from "@/hooks/apis/workspaces/useChangeWorkspaceJoinCode";
-import Spinner from "@/components/molecules/Spinner";
 import { toast } from "@/hooks/use-toast";
 
 function AddMemberLinkModal() {

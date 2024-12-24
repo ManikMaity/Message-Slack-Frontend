@@ -104,17 +104,38 @@ export async function addChannelToWorkspace({ channelName, workspaceId }) {
   }
 }
 
-export async function changeWorkspaceJoinCode({workspaceId}){
+export async function changeWorkspaceJoinCode({ workspaceId }) {
   try {
-    const response = await axios.put(`/workspace/change-joinCode/${workspaceId}`, {}, {
-      headers: {
-        slack_token,
-      },
-    });
+    const response = await axios.put(
+      `/workspace/change-joinCode/${workspaceId}`,
+      {},
+      {
+        headers: {
+          slack_token,
+        },
+      }
+    );
 
     return response?.data?.data;
+  } catch (err) {
+    throw err.response.data;
   }
-  catch (err) {
+}
+
+export async function joinWorkspaceByJoinCode({ joinCode }) {
+  try {
+    const response = await axios.put(
+      `/workspace/joinByCode/${joinCode}`,
+      {},
+      {
+        headers: {
+          slack_token,
+        },
+      }
+    );
+
+    return response?.data?.data;
+  } catch (err) {
     throw err.response.data;
   }
 }
