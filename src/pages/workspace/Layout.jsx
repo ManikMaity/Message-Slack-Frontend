@@ -1,12 +1,17 @@
 import { SidebarOpen } from "lucide-react";
 
-import WorkspaceContentLayout from "@/components/organisms/workspace/WorkspaceContentLayout";
+import WorkspaceContentPanel from "@/components/organisms/workspace/WorkspaceContentPanel";
 import WorkspaceNavbar from "@/components/organisms/workspace/WorkspaceNavbar";
 import WorkspaceSidebar from "@/components/organisms/workspace/WorkspaceSidebar";
 import { Button } from "@/components/ui/button";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import useSidebarContext from "@/hooks/apis/context/useSidebarContext";
 
-function WorkSpaceLayout() {
+function WorkSpaceLayout({ children }) {
   const { mainSidebarOpen, setMainSidebarOpen } = useSidebarContext();
 
   return (
@@ -29,7 +34,15 @@ function WorkSpaceLayout() {
           {mainSidebarOpen && <WorkspaceSidebar />}
         </div>
         <div className="w-full">
-          <WorkspaceContentLayout/>
+        <ResizablePanelGroup direction="horizontal" className="border border-slack/80 dark:border-slate-800/80 rounded-tl-md overflow-hidden" autoSaveId={"workspace-content"}>
+      <ResizablePanel defaultSize={20} className="bg-slack-dark600 dark:bg-slate-950">
+        <WorkspaceContentPanel/>
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel className="dark:bg-slate-800 bg-gray-50">
+        {children}
+      </ResizablePanel>
+    </ResizablePanelGroup>
         </div>
       </div>
     </div>

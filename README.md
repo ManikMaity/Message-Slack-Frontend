@@ -37,4 +37,8 @@ export default defineConfig({
 ## Task
 - Collect the token after signing in , redirect to workspace page, feth all the workspace , if not workspace found pop up to make a workspace. ✔️✔️
 
-- Add members in the workspace main content pannel, add add member to workspace -> Pop up join workspace link -> copy and refress ->  link to join workspace 
+- Add members in the workspace main content pannel, add add member to workspace -> Pop up join workspace link -> copy and refress ->  link to join workspace 😃✔️
+
+
+More feature -> 
+- Disable add to accepting add to workspace

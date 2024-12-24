@@ -1,19 +1,20 @@
+import { Hash, Plus } from "lucide-react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import SidebarChannelButton from "@/components/atoms/Channels/SidebarChannelButton";
+import MemberWorkspacePannelBtn from "@/components/atoms/MemberWorkspacePannelBtn/MemberWorkspacePannelBtn";
+import WorkspaceContentPanelLoader from "@/components/atoms/SkeletonLoaders/WorkspaceContentPanelLoader";
 import Spinner from "@/components/molecules/Spinner";
+import WorkspaceContentPanelSec from "@/components/molecules/Workspace/WorkspaceContentPanelSec/WorkspaceContentPanelSec";
 import WorkspacePanelHeader from "@/components/molecules/Workspace/WorkspacePanelHeader";
+import { Button } from "@/components/ui/button";
+import useCreateChannelModalContext from "@/hooks/apis/context/useCreateChannelModalContext";
+import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
+import useWorkspaceDataContext from "@/hooks/apis/context/useWorkspaceDataContext";
 import useGetWorkspaceData from "@/hooks/apis/workspaces/useGetWorkspaceData";
 
 import DatabaseError from "../errors/DatabaseError";
-import SidebarChannelButton from "@/components/atoms/Channels/SidebarChannelButton";
-import { Hash, Plus } from "lucide-react";
-import WorkspaceContentPanelSec from "@/components/molecules/Workspace/WorkspaceContentPanelSec/WorkspaceContentPanelSec";
-import { Button } from "@/components/ui/button";
-import useCreateChannelModalContext from "@/hooks/apis/context/useCreateChannelModalContext";
-import MemberWorkspacePannelBtn from "@/components/atoms/MemberWorkspacePannelBtn/MemberWorkspacePannelBtn";
-import { useEffect } from "react";
-import useWorkspaceDataContext from "@/hooks/apis/context/useWorkspaceDataContext";
-import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ function WorkspaceContentPanel() {
   const { setWorkspaceData } = useWorkspaceDataContext();
 
   useEffect(() => {
-    console.log(workspaceData, "WorkspaceContentPanel rerender")
+    console.log(workspaceData, "WorkspaceContentPanel rerender");
     if (!workspaceData) return;
     setWorkspaceData(workspaceData);
   }, [id, workspaceData]);
@@ -41,9 +42,7 @@ function WorkspaceContentPanel() {
 
   if (isLoading) {
     return (
-      <div className="min-h-40 grid place-content-center">
-        <Spinner />
-      </div>
+      <WorkspaceContentPanelLoader/>
     );
   }
 
@@ -61,7 +60,7 @@ function WorkspaceContentPanel() {
   }
 
   return (
-    <div className="p-2 text-white">
+    <div className="p-2 text-white h-full overflow-y-scroll overflow-x-hidden">
       <WorkspacePanelHeader workspaceData={workspaceData} />
       <div className="flex flex-col gap-2 mt-3">
         <WorkspaceContentPanelSec
@@ -84,7 +83,7 @@ function WorkspaceContentPanel() {
               variant="transparent"
             >
               <p className="p-0.5 rounded-sm bg-accent">
-                <Plus />
+                <Plus className="text-gray-400" />
               </p>
               <span>Create Channel</span>
             </Button>
@@ -99,7 +98,6 @@ function WorkspaceContentPanel() {
               memberId={member?._id}
               image={member?.member?.avatar}
               role={member?.role}
-
             />
           ))}
           <Button
@@ -109,7 +107,7 @@ function WorkspaceContentPanel() {
             onClick={addMemberHandler}
           >
             <p className="p-0.5 rounded-sm bg-accent">
-              <Plus />
+              <Plus className="text-gray-400"/>
             </p>
             <span>Add Member</span>
           </Button>

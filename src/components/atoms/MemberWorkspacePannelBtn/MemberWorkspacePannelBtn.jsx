@@ -4,13 +4,13 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-function MemberWorkspacePannelBtn({variant, name, memberId = "member", image, role = "member"}) {
+function MemberWorkspacePannelBtn({variant = "default", name, memberId = "member", image, role = "member"}) {
     const memberWorkspacePannelBtnVariants = cva(
         "flex items-center justify-start gap-2 px-2 text-sm h-8",
         {
           variants: {
             varient: {
-              default: "text-white/50",
+              default: "text-white/80 dark:text-white/50",
               active: "bg-[#7D3986] dark:bg-slate-700 text-white hover:bg-[#7D3986] dark:hover:bg-slate-700",
             },
           },

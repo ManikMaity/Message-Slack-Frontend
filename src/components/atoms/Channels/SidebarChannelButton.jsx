@@ -11,7 +11,7 @@ function SidebarChannelButton({ label = "Default", channelId, Icon, varient = "d
     {
       variants: {
         varient: {
-          default: "text-white/50",
+          default: "text-white/80 dark:text-white/50",
           active: "bg-[#7D3986] dark:bg-slate-700 text-white hover:bg-[#7D3986] dark:hover:bg-slate-700",
         },
       },
