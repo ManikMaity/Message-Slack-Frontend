@@ -15,14 +15,14 @@ function WorkSpaceLayout({ children }) {
   const { mainSidebarOpen, setMainSidebarOpen } = useSidebarContext();
 
   return (
-    <div className="h-screen w-full flex-col dark:bg-slate-900 bg-slack-dark">
+    <div className="h-screen w-full overflow-hidden flex-col dark:bg-slate-900 bg-slack-dark">
       <div className="h-[6%] w-full flex items-center py-[5px] dark:bg-slate-900 bg-slack-dark">
         <WorkspaceNavbar />
       </div>
       <div className="flex h-[94%] relative">
         {!mainSidebarOpen && (
           <Button
-            className="absolute bottom-1 left-1"
+            className="absolute bottom-40 left-1"
             size="sm"
             variant="outline"
             onClick={() => setMainSidebarOpen(true)}
@@ -33,13 +33,13 @@ function WorkSpaceLayout({ children }) {
         <div className={`${mainSidebarOpen ? "w-[65px] md:w-[70px]" : "w-0"}`}>
           {mainSidebarOpen && <WorkspaceSidebar />}
         </div>
-        <div className="w-full">
+        <div className={`${mainSidebarOpen ? "w-[calc(100%-65px)] md:w-[calc(100%-70px)]" : "w-full"}`}>
         <ResizablePanelGroup direction="horizontal" className="border border-slack/80 dark:border-slate-800/80 rounded-tl-md overflow-hidden" autoSaveId={"workspace-content"}>
       <ResizablePanel defaultSize={20} className="bg-slack-dark600 dark:bg-slate-950">
         <WorkspaceContentPanel/>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel className="dark:bg-slate-800 bg-gray-50">
+      <ResizablePanel className="bg-gray-100 dark:bg-slate-900">
         {children}
       </ResizablePanel>
     </ResizablePanelGroup>

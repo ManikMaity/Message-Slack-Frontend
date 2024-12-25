@@ -18,6 +18,7 @@ import DatabaseError from "../errors/DatabaseError";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
+  const {channelId} = useParams();
   const { workspaceData, isLoading, isError, error, refetch } =
     useGetWorkspaceData(id);
   const { setWorkspaceData } = useWorkspaceDataContext();
@@ -74,6 +75,7 @@ function WorkspaceContentPanel() {
                 label={channel.name}
                 Icon={Hash}
                 channelId={channel._id}
+                varient={channelId === channel._id ? "active" : "default"}
               />
             ))}
             <Button

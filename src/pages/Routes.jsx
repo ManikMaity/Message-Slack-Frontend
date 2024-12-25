@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import SigninContainer from "@/components/organisms/auth/SigninContainer";
 import SignupContainer from "@/components/organisms/auth/SignupContainer";
+import ChannelLayout from "@/components/organisms/Channel/ChannelLayout";
 import ForgetPasswordContainer from "@/components/organisms/forgetPassword/ForgetPasswordContainer";
 import ResetPasswordContainer from "@/components/organisms/forgetPassword/ResetPasswordContainer";
 import Auth from "@/pages/auth/Auth";
@@ -51,7 +52,7 @@ export function AppRoutes() {
       <Route element={<PrivateRoute />}>
         <Route path="/workspaces" element={<Workspaces />} />
         <Route path="/workspace/:id" element={<WorkSpaceLayout>Workspace</WorkSpaceLayout>}/>
-        <Route path="/workspace/:id/channel/:channelId" element={<div>Channel</div>}/>
+        <Route path="/workspace/:id/channel/:channelId" element={<WorkSpaceLayout><ChannelLayout/></WorkSpaceLayout>}/>
         <Route path="/workspace/join/:joinCode" element={<JoinWorkspaceByCode/>}/>
       </Route>
       <Route path="/" element={<Home/>} />

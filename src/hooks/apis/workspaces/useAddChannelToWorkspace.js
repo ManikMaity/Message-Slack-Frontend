@@ -3,10 +3,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addChannelToWorkspace } from "@/apis/workspace";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
+import { useNavigate } from "react-router-dom";
 
 function useAddChannelToWorkspace() {
 
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
   const {
     mutateAsync: addChannelToWorkspaceMutateAsync,
@@ -23,6 +25,7 @@ function useAddChannelToWorkspace() {
         description: "Successfully added channel to workspace",
         type: "success",
       });
+      console.log(data, "Channel added to workspace");
       queryClient.refetchQueries(`workspace-data-${data?._id}`);
     },
     onError: (error) => {

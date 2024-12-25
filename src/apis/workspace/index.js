@@ -139,3 +139,19 @@ export async function joinWorkspaceByJoinCode({ joinCode }) {
     throw err.response.data;
   }
 }
+
+export async function getChannelDetails({ channelId }) {
+  try {
+    
+    const response = await axios.get(`/channel/${channelId}`, {
+      headers: {
+        slack_token,
+      },
+    });
+
+    return response?.data?.data;
+
+  } catch (err) {
+    throw err.response.data;
+  }
+}
