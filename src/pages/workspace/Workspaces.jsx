@@ -17,7 +17,7 @@ function Workspaces() {
       setOpenCreateModal(true);
     }
     else {
-      navigate(`/workspace/${workspacesData?.data[0]?._id}`);
+      navigate(`/workspace/${workspacesData?.data[0]?._id}/channel/${workspacesData?.data[0]?.channels[0]}`);
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

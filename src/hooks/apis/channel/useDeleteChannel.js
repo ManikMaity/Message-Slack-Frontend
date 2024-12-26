@@ -1,12 +1,15 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { deleteChannel } from "@/apis/channel";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
+import { useNavigate } from "react-router-dom";
 
 function useDeleteChannel() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const {
-    isPaused,
+    isPending,
     isSuccess,
     isError,
     mutateAsync: deleteChannelMutateAsync,
@@ -18,6 +21,15 @@ function useDeleteChannel() {
         description: `Channel ${data?.name} deleted successfully`,
         type: "success",
       });
+      console.log("Successfully deleted channel", data);
+      if (data?.workspaceId?.channels.length === 0) {
+        navigate(`/workspaces`);
+      } else {
+        navigate(
+          `/workspace/${data?.workspaceId?._id}/channel/${data?.workspaceId?.channels[0]}`
+        );
+      }
+      queryClient.refetchQueries([`workspace-data-${data?.workspaceId?._id}`]);
     },
     onError: (error) => {
       toast({
@@ -28,7 +40,7 @@ function useDeleteChannel() {
     },
   });
 
-  return { isPaused, isSuccess, isError, deleteChannelMutateAsync };
+  return { isPending, isSuccess, isError, deleteChannelMutateAsync };
 }
 
 export default useDeleteChannel;

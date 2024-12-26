@@ -9,6 +9,7 @@ import ChannelHeader from "@/components/atoms/Channels/ChannelHeader";
 function ChannelLayout() {
   const { channelId } = useParams();
   const { channelData, isLoading, isError, error, refetch } = useGetChannelData(channelId);
+  console.log(channelData, "channel data ChannelLayout");
 
   if (isLoading) {
     return (
@@ -24,7 +25,7 @@ function ChannelLayout() {
 
   return <div className="h-full flex flex-col">
     <div className="flex-1">
-      <ChannelHeader/>
+      <ChannelHeader name={channelData?.name} id={channelData?._id}/>
     </div>
     <ChatInput/>
   </div>;

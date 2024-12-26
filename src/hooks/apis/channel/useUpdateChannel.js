@@ -1,12 +1,13 @@
+import { useMutation } from "@tanstack/react-query";
+
 import { updateChannel } from "@/apis/channel";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
-import { useMutation } from "@tanstack/react-query";
 
 function useUpdateChannelName() {
   const {
     mutateAsync: updateChannelNameAsync,
-    isPaused,
+    isPending,
     isError,
     isSuccess,
   } = useMutation({
@@ -16,6 +17,7 @@ function useUpdateChannelName() {
         title: "Channel name updated successfully",
         description: `Channel name updated to ${data?.name} successfully`,
       });
+      console.log(data, "updateChannelNameHook");
     },
 
     onError: (error) => {
@@ -29,7 +31,7 @@ function useUpdateChannelName() {
 
   return {
     updateChannelNameAsync,
-    isPaused,
+    isPending,
     isError,
     isSuccess,
   };
