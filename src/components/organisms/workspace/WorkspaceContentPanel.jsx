@@ -1,6 +1,6 @@
 import { Hash, Plus } from "lucide-react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import SidebarChannelButton from "@/components/atoms/Channels/SidebarChannelButton";
 import MemberWorkspacePannelBtn from "@/components/atoms/MemberWorkspacePannelBtn/MemberWorkspacePannelBtn";
@@ -15,23 +15,36 @@ import useWorkspaceDataContext from "@/hooks/apis/context/useWorkspaceDataContex
 import useGetWorkspaceData from "@/hooks/apis/workspaces/useGetWorkspaceData";
 
 import DatabaseError from "../errors/DatabaseError";
+import { toast } from "@/hooks/use-toast";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
-  const {channelId} = useParams();
+  const { channelId } = useParams();
   const { workspaceData, isLoading, isError, error, refetch } =
     useGetWorkspaceData(id);
   const { setWorkspaceData } = useWorkspaceDataContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(workspaceData, "WorkspaceContentPanel rerender");
-    if (!workspaceData) return;
-    setWorkspaceData(workspaceData);
-  }, [id, workspaceData]);
+    if (!isLoading && isError) {
+      if (error?.message === "Expired auth token provided") {
+        toast({
+          title: "Session Expired",
+          description: "Please sign in again to continue",
+          variant: "destructive",
+        });
+        navigate("/signin");
+      }
+    }
+
+    if (workspaceData) {
+      setWorkspaceData(workspaceData);
+    }
+  }, [id, workspaceData, error, isLoading, isError]);
 
   console.log(workspaceData);
   const { setCreateChannelModalOpen } = useCreateChannelModalContext();
-  const {setWorkspaceLinkModalOpen} = useModalOpenContext();
+  const { setWorkspaceLinkModalOpen } = useModalOpenContext();
 
   function addChannelHandler() {
     setCreateChannelModalOpen(true);
@@ -42,9 +55,7 @@ function WorkspaceContentPanel() {
   }
 
   if (isLoading) {
-    return (
-      <WorkspaceContentPanelLoader/>
-    );
+    return <WorkspaceContentPanelLoader />;
   }
 
   if (isError) {
@@ -92,7 +103,10 @@ function WorkspaceContentPanel() {
           </>
         </WorkspaceContentPanelSec>
 
-        <WorkspaceContentPanelSec label={"Members"} addButtonClickFn={addMemberHandler}>
+        <WorkspaceContentPanelSec
+          label={"Members"}
+          addButtonClickFn={addMemberHandler}
+        >
           {workspaceData?.members?.map((member) => (
             <MemberWorkspacePannelBtn
               key={member._id}
@@ -109,7 +123,7 @@ function WorkspaceContentPanel() {
             onClick={addMemberHandler}
           >
             <p className="p-0.5 rounded-sm bg-accent">
-              <Plus className="text-gray-400"/>
+              <Plus className="text-gray-400" />
             </p>
             <span>Add Member</span>
           </Button>

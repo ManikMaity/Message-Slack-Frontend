@@ -1,3 +1,4 @@
+import { Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import Spinner from "@/components/molecules/Spinner";
@@ -11,12 +12,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import useDeleteChannel from "@/hooks/apis/channel/useDeleteChannel";
+import useUpdateChannelName from "@/hooks/apis/channel/useUpdateChannel";
 import useConfirm from "@/hooks/useConfirm";
 
 import TextEdit from "../TextEdit/TextEdit";
 import CustomTooltip from "../Tooltip/CustomTooltip";
-import useUpdateChannelName from "@/hooks/apis/channel/useUpdateChannel";
-import { Trash } from "lucide-react";
 
 function ChannelHeader({ name = "Hi theere", id }) {
   const [channelName, setChannelName] = useState(name);
