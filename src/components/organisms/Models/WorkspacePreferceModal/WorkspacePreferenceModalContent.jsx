@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import TextEdit from "@/components/atoms/TextEdit/TextEdit";
 
 function WorkspacePreferenceModalContent({
   wsPreferenceModalOpen,
@@ -23,7 +24,7 @@ function WorkspacePreferenceModalContent({
   deleteWorkspacePending,
   handleWorkspaceNameChange,
   updateWorkspacePending,
-  ConfirmAlert
+  ConfirmAlert,
 }) {
   return (
     <Dialog
@@ -33,7 +34,7 @@ function WorkspacePreferenceModalContent({
         setShowNameInput(false);
       }}
     >
-      <ConfirmAlert/>
+      <ConfirmAlert />
       <DialogContent className="max-w-[600px] w-[95%]">
         <DialogHeader>
           <DialogTitle className="text-2xl">Prefrences</DialogTitle>
@@ -42,39 +43,15 @@ function WorkspacePreferenceModalContent({
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4 text-sm">
-          <div className="py-3 px-4 border border-input rounded-md leading-none">
-            <div className="flex justify-between ">
-              <p className="font-bold">Workspace Name</p>
-              <Button
-                size="xs"
-                onClick={() => setShowNameInput(!showNameInput)}
-                className="p-1"
-                variant="outline"
-              >
-                {showNameInput? <X/> : <EditIcon />}
-              </Button>
-            </div>
-            {showNameInput ? (
-              <form onSubmit={handleWorkspaceNameChange} className="flex gap-2 mt-2">
-                <Input
-                  size="sm"
-                  type="text"
-                  required
-                  placeholder="Workspace Name"
-                  minLength={3}
-                  maxLength={50}
-                  autoFocus
-                  defaultValue={values?.name}
-                  onChange={(e) =>
-                    setValues({ ...values, name: e.target.value })
-                  }
-                />
-                <Button disabled={updateWorkspacePending} type="submit">{updateWorkspacePending ? <Spinner /> : "Save"}</Button>
-              </form>
-            ) : (
-              <p>{values?.name}</p>
-            )}
-          </div>
+          <TextEdit
+            label={"Workspace Name"}
+            showInput={showNameInput}
+            values={values?.name}
+            setValues={(value) => setValues({ ...values, name: value })}
+            onSubmitFn={handleWorkspaceNameChange}
+            submitLoading={updateWorkspacePending}
+            setShowInput={setShowNameInput}
+          />
           <Button
             onClick={deleteWorkspaceFn}
             variant="error"
@@ -82,7 +59,11 @@ function WorkspacePreferenceModalContent({
             size="lg"
           >
             <Trash />
-            {deleteWorkspacePending ? <Spinner /> : <p>Delete {values?.name}</p>}
+            {deleteWorkspacePending ? (
+              <Spinner />
+            ) : (
+              <p>Delete {values?.name}</p>
+            )}
           </Button>
         </div>
         <DialogFooter></DialogFooter>

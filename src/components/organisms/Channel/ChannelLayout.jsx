@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import DatabaseError from "../errors/DatabaseError";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 import ChatInput from "@/components/molecules/ChatInput/ChatInput";
+import ChannelHeader from "@/components/atoms/Channels/ChannelHeader";
 
 function ChannelLayout() {
   const { channelId } = useParams();
@@ -22,7 +23,9 @@ function ChannelLayout() {
   }
 
   return <div className="h-full flex flex-col">
-    <div className="flex-1">{channelId}</div>
+    <div className="flex-1">
+      <ChannelHeader/>
+    </div>
     <ChatInput/>
   </div>;
 }
