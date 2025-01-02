@@ -25,7 +25,6 @@ function useAddChannelToWorkspace() {
         description: "Successfully added channel to workspace",
         type: "success",
       });
-      console.log(data, "Channel added to workspace");
       queryClient.refetchQueries(`workspace-data-${data?._id}`);
     },
     onError: (error) => {

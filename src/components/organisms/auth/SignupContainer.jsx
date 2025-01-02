@@ -28,13 +28,11 @@ function SignupContainer() {
       signupFormData.password.trim() === "" ||
       signupFormData.confirmPassword.trim() === ""
     ) {
-      console.log("Please fill all the fields");
       setSignupError({ message: "Please fill all the fields" });
       return;
     }
 
     if (signupFormData.password !== signupFormData.confirmPassword) {
-      console.log("Passwords do not match");
       setSignupError({ message: "Passwords do not match" });
       return;
     }

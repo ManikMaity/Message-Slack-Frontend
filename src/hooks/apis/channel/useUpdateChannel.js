@@ -17,7 +17,6 @@ function useUpdateChannelName() {
         title: "Channel name updated successfully",
         description: `Channel name updated to ${data?.name} successfully`,
       });
-      console.log(data, "updateChannelNameHook");
     },
 
     onError: (error) => {

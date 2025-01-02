@@ -15,7 +15,6 @@ function useSignin() {
   const {data, mutateAsync : signinMutateAsync, isError, isLoading, isSuccess, error} = useMutation({
     mutationFn : signinRequest,
     onSuccess : (data) => {
-        console.log("Signined in Successfully", data);
         setAuth({
           loading : false,
           token : data?.data?.token,
@@ -30,7 +29,6 @@ function useSignin() {
         });
     },
     onError : (error) => {
-        console.log("Error while signing", error);
         toast({
             title: "Error while signing",
             description: getErrorMessage(error),

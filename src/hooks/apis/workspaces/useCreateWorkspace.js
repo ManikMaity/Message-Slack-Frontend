@@ -26,7 +26,6 @@ function useCreateWorkspace() {
       queryClient.invalidateQueries(["workspaces"]);
     },
     onError: (error) => {
-      console.log("Error while creating workspace", error);
       toast({
         title: "Error while creating workspace",
         description: getErrorMessage(error),

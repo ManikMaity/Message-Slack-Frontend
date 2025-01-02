@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import Quill from "quill";
 import "quill/dist/quill.snow.css";
-import { Button } from "@/components/ui/button";
+
 import {
   ALargeSmallIcon,
   ImageIcon,
   SendHorizonal,
-  SmileIcon,
 } from "lucide-react";
-import { handler } from "tailwindcss-animate";
+import Quill from "quill";
+import { useEffect, useRef, useState } from "react";
+
 import CustomTooltip from "@/components/atoms/Tooltip/CustomTooltip";
+import { Button } from "@/components/ui/button";
 
 function Editor({
   varient = "create",
@@ -28,6 +28,14 @@ function Editor({
   function toogleToolbar() {
     const toolbar = containerRef.current.querySelector(".ql-toolbar");
     toolbar.style.display = toolbar.style.display === "none" ? "block" : "none";
+  }
+
+  function handleSend() {
+    if (quillRef.current) {
+      const data = quillRef.current?.getContents();
+      onSubmit({ editorContent: data });
+      quillRef.current.setText("");
+    }
   }
 
   useEffect(() => {
@@ -97,19 +105,23 @@ function Editor({
         <div ref={containerRef} className="h-full ql-custom z-10" />
         <div className="flex px-2 pb-2 justify-between">
           <div className="flex gap-1">
-            <CustomTooltip content="Toggle Toolbar" side="left">
+            <CustomTooltip content="Hide editor" side="left">
               <Button variant={"ghost"} size="sm" onClick={toogleToolbar}>
                 <ALargeSmallIcon />
               </Button>
             </CustomTooltip>
+            <CustomTooltip content="Upload image" side="right">
 
             <Button variant={"ghost"} size="sm">
               <ImageIcon />
             </Button>
+            </CustomTooltip>
           </div>
-          <Button size="sm" variant="secondary">
+          <CustomTooltip content="Send message" side="right">
+          <Button size="sm" variant="secondary" onClick={handleSend}>
             <SendHorizonal />
           </Button>
+          </CustomTooltip>
         </div>
       </div>
     </div>

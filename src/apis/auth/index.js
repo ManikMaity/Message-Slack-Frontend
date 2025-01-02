@@ -10,7 +10,6 @@ export async function signupRequest({username, email, password}) {
         return response.data;
     }
     catch (error) {
-        console.log(error);
         throw error.response.data;
     }
 }
@@ -24,7 +23,6 @@ export async function signinRequest({email, password}) {
         return response.data;
     }
     catch (error) {
-        console.log(error);
         throw error.response.data;
     }
 }

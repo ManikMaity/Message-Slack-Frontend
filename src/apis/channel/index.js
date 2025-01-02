@@ -17,7 +17,6 @@ export async function updateChannel({ id, data }) {
 
 export async function deleteChannel(id) {
   try {
-    console.log("delete channel api", id);
     const response = await axios.delete(`/channel/${id}`, {
       headers: {
         slack_token,

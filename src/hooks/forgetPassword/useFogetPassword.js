@@ -9,7 +9,6 @@ function useFogetPassword() {
   const { isSuccess, isError, error, isPending, mutateAsync : forgetPasswordMutateAsync } = useMutation({
     mutationFn: forgetPasswordRequest,
     onSuccess: (data) => {
-      console.log("Successfully sent reset password link to email", data);
       toast({
         title : "Successfully sent reset password link to email",
         description : "Check your email to reset your password",
@@ -17,7 +16,6 @@ function useFogetPassword() {
       });
     },
     onError: (error) => {
-      console.log("Error while sending reset password link to email", error);
       toast({
         title : "Error while sending reset password link to email",
         description : getErrorMessage(error),

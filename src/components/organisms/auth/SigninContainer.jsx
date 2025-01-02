@@ -26,7 +26,6 @@ function SigninContainer() {
       signinFormData.email.trim() === "" ||
       signinFormData.password.trim() === ""
     ) {
-      console.log("Please fill all the fields");
       setSigninError({ message: "Please fill all the fields" });
       return;
     }

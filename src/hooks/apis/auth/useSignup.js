@@ -12,7 +12,6 @@ function useSignup() {
     const { mutateAsync : signupMutateAsync, isLoading, error, data, isSuccess } = useMutation({
         mutationFn: signupRequest,
         onSuccess: (data) => {
-            console.log("Successfully signed up", data);
             toast({
                 title: "Successfully signed up",
                 description: "You will be redirected to signin page in a few seconds",
@@ -20,7 +19,6 @@ function useSignup() {
             });
         },
         onError: (error) => {
-            console.log("Error signing up", error);
             toast({
                 title: "Error signing up",
                 description: getErrorMessage(error),

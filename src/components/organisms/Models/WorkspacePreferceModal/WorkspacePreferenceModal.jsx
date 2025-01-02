@@ -39,7 +39,6 @@ function WorkspacePreferenceModal() {
       return;
     }
     const resposne = await updateWorkspaceMutateAsync({id : values?._id, data : {name : values?.name || workspacePreferencesVlaue?.name}});
-    console.log(resposne, "update workspace name response");
     setShowNameInput(false);
   }
 

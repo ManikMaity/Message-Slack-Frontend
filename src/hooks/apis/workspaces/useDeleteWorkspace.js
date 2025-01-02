@@ -19,7 +19,6 @@ function useDeleteWorkspace() {
   } = useMutation({
     mutationFn: deleteWorkspace,
     onSuccess: (data) => {
-      console.log("Successfully deleted workspace", data);
       toast({
         title: `${data?.name} workspace deleted`,
         description: "Successfully deleted workspace",
@@ -29,7 +28,6 @@ function useDeleteWorkspace() {
       navigator("/workspaces");
     },
     onError: (error) => {
-      console.log("Error while deleting workspace", error);
       toast({
         title: "Error while deleting workspace",
         description: getErrorMessage(error),

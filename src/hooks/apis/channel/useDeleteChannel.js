@@ -21,7 +21,6 @@ function useDeleteChannel() {
         description: `Channel ${data?.name} deleted successfully`,
         type: "success",
       });
-      console.log("Successfully deleted channel", data);
       if (data?.workspaceId?.channels.length === 0) {
         navigate(`/workspaces`);
       } else {

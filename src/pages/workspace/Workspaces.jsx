@@ -13,7 +13,6 @@ function Workspaces() {
   useEffect(() => {
     if (isLoading || isError) return;
     if (workspacesData?.data?.length === 0 || !workspacesData?.data){
-      console.log("No workspaces found, Creating one");
       setOpenCreateModal(true);
     }
     else {

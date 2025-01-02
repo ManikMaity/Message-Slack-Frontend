@@ -23,7 +23,6 @@ function WorkspacePanelHeader({ workspaceData }) {
   }, [workspaceData]);
 
   const { auth } = useAuthContext();
-  console.log(auth);
   const isAdmin = workspaceData?.members.find((member) => {
     if (member?.member?._id === auth?.user?._id && member.role === "admin") {
       return member;

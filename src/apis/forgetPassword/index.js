@@ -6,7 +6,6 @@ export async function forgetPasswordRequest(email){
         return response.data;
     }
     catch(err){
-        console.log(err, "Foget password api error");
         throw err.response.data;
     }
 }
@@ -18,7 +17,6 @@ export async function resetPasswordRequest(data){
         return response.data;
     }
     catch(err){
-        console.log(err, "Foget password api error");
         throw err.response.data;
     }
 }

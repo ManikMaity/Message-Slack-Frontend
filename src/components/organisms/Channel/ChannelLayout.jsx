@@ -5,11 +5,21 @@ import DatabaseError from "../errors/DatabaseError";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 import ChatInput from "@/components/molecules/ChatInput/ChatInput";
 import ChannelHeader from "@/components/atoms/Channels/ChannelHeader";
+import Message from "@/components/molecules/Message/Message";
+import { useEffect } from "react";
+import useSocketContext from "@/hooks/apis/context/useSocketContext";
 
 function ChannelLayout() {
   const { channelId } = useParams();
   const { channelData, isLoading, isError, error, refetch } = useGetChannelData(channelId);
-  console.log(channelData, "channel data ChannelLayout");
+  const { joinChannel } = useSocketContext();
+
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      console.log(channelId, joinChannel);
+      joinChannel({ channelId });
+    }
+  }, [isLoading, isError, channelId]);
 
   if (isLoading) {
     return (
@@ -26,6 +36,7 @@ function ChannelLayout() {
   return <div className="h-full flex flex-col">
     <div className="flex-1">
       <ChannelHeader name={channelData?.name} id={channelData?._id}/>
+      <Message/>
     </div>
     <ChatInput/>
   </div>;

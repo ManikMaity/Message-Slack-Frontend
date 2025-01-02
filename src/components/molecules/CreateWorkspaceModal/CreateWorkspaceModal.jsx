@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceContext";
 import useCreateWorkspace from "@/hooks/apis/workspaces/useCreateWorkspace";
+import { toast } from "@/hooks/use-toast";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
 import Spinner from "../Spinner";
 
@@ -38,7 +40,10 @@ export function CreateWorkspaceModal() {
       setOpenCreateModal(false);
       navigator(`/workspace/${data?._id}`);
     } catch (error) {
-      console.log("Error while creating workspace", error);
+      toast({
+        title: "Error",
+        description: getErrorMessage(error),
+      });
     }
   }
 

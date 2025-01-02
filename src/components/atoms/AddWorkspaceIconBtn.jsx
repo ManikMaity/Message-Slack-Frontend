@@ -7,7 +7,6 @@ import { Button } from "../ui/button";
 function AddWorkspaceIconBtn() {
 
     const { setOpenCreateModal, openCreateModal } = useCreateWorkspaceContext();
-    console.log(openCreateModal);
 
   return (
     <Button onClick={() => setOpenCreateModal(true)} variant="outline" className="rounded-full h-11 w-11">

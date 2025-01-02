@@ -42,7 +42,6 @@ function WorkspaceContentPanel() {
     }
   }, [id, workspaceData, error, isLoading, isError]);
 
-  console.log(workspaceData);
   const { setCreateChannelModalOpen } = useCreateChannelModalContext();
   const { setWorkspaceLinkModalOpen } = useModalOpenContext();
 

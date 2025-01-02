@@ -11,7 +11,6 @@ export async function getAllUserWorkspaces() {
     });
     return response.data;
   } catch (error) {
-    console.log("Get User All Workspace error", error);
     throw error.response.data;
   }
 }
@@ -36,7 +35,6 @@ export async function createWorkspace({ name, description, imageUrl = null }) {
 
     return response.data?.data;
   } catch (error) {
-    console.log("Get User All Workspace error", error);
     throw error.response.data;
   }
 }

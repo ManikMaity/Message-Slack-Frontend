@@ -6,8 +6,10 @@ import CombinedContext from "@/utils/CombinedContext";
 
 import { ModalInitialValuesProvider } from "./ModalInitialValuesContext";
 import { WorkspaceDataContextProvider } from "./WorkspaceDataContext";
+import { SocketProvider } from "./SocketContext";
 
 const CombinedContextProvier = CombinedContext(
+  SocketProvider,
   AuthProvider,
   CreateWorkspaceProvider,
   SidebarProvider,

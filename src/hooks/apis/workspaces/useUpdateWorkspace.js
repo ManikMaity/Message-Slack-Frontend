@@ -12,7 +12,6 @@ function useUpdateWorkspace() {
   const {mutateAsync: updateWorkspaceMutateAsync, isSuccess, isPending, isError, error} = useMutation({
     mutationFn: updateWorkspace,
     onSuccess: (data) => {
-      console.log("Successfully updated workspace", data);
       toast({
         title: `${data?.name || ""} workspace updated`,
         description: "Successfully updated workspace",
@@ -22,7 +21,6 @@ function useUpdateWorkspace() {
       queryClient.refetchQueries([`workspace-data-${data?._id}`]);
     },
     onError: (error) => {
-      console.log("Error while updating workspace", error);
       toast({
         title: "Error while updating workspace",
         description: getErrorMessage(error),

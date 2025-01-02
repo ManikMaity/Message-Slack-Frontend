@@ -20,7 +20,6 @@ function ChangeWorkspaceBtn() {
     useGetUserWorkspace();
   const {id} = useParams();
   const navigate = useNavigate();
-  console.log(workspacesData, "workspacesData");
   const handleWorkspaceChange = (value) => {
     navigate(`/workspace/${value}`);
   };

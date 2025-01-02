@@ -43,7 +43,6 @@ function AddMemberLinkModal() {
 
   useEffect(() => {
     if (workspaceData) {
-      console.log("Rendered after workspaceData", workspaceData);
       setJoinCode(workspaceData.joinCode);
     }
   }, [workspaceData]);
