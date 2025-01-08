@@ -5,6 +5,7 @@ import { dateStringToLocalString, dateStringToTime } from "@/utils/dataFormater"
 import React from "react";
 import './message.css';
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
+import MessageImageThumbnail from "@/components/atoms/MessageImageThumnail/MessageImageThumbnail";
 
 const data = {
   "_id": "677e1a86354df5b9dc72be63",
@@ -47,6 +48,7 @@ function Message({messageData = data}) {
           </CustomTooltip>
         </div>
         <div className="mt-0.5">
+          {messageData?.image && <MessageImageThumbnail url={messageData?.image}/>}
           <MessageRenderer
             value={messageData?.text}
           />

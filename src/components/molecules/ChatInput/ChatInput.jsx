@@ -23,7 +23,7 @@ function ChatInput() {
   }
 
   return (
-    <div className="px-2 md:px-5 min-h-[140px] absolute bottom-0 w-full">
+    <div className="px-2 md:px-5 min-h-[140px] flex flex-col justify-end absolute bottom-0 w-full">
       <Editor
         placeholder="Type a message"
         varient="create"
