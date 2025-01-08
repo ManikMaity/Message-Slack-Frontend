@@ -2,6 +2,7 @@ import CreateWorkspaceModal from "@/components/molecules/CreateWorkspaceModal/Cr
 import WorkspacePreferenceModal from "@/components/organisms/Models/WorkspacePreferceModal/WorkspacePreferenceModal";
 import CreateChannelModal from "./CreateChannelModal/CreateChannelModal";
 import AddMemberLinkModal from "./AddMemberLinkModal/AddMemberLinkModal";
+import UserProfileModal from "./UserProfileModal/UserProfileModal";
 
 function ModelContainer() {
   return (
@@ -10,6 +11,7 @@ function ModelContainer() {
       <WorkspacePreferenceModal/>
       <CreateChannelModal/>
       <AddMemberLinkModal/>
+      <UserProfileModal/>
     </>
   );
 }

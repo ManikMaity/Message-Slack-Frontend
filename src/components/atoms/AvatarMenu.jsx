@@ -14,11 +14,14 @@ import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceCo
 import useLogout from "@/hooks/apis/useLogout";
 
 import { Button } from "../ui/button";
+import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 
 function AvatarMenu() {
   const { auth } = useAuthContext();
   const {setOpenCreateModal} = useCreateWorkspaceContext();
   const {logoutFn} = useLogout();
+  const {setUserProfileModalOpen} = useModalOpenContext();
+
 
   return (
     <DropdownMenu>
@@ -39,7 +42,7 @@ function AvatarMenu() {
           <Pencil/>
           <p>Create a Workspace</p>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setUserProfileModalOpen(true)}>
           <Settings2 />
           <p>Settings</p>
         </DropdownMenuItem>

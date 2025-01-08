@@ -7,6 +7,7 @@ export function ModalOpenProvider({ children }) {
   const [wsPreferenceModalOpen, setWsPreferenceModalOpen] = useState(false);
   const [createChannelModalOpen, setCreateChannelModalOpen] = useState(false);
   const [workspaceLinkModalOpen, setWorkspaceLinkModalOpen] = useState(false);
+  const [userProfileModalOpen, setUserProfileModalOpen] = useState(false);
 
   return (
     <ModalOpenContext.Provider
@@ -17,6 +18,8 @@ export function ModalOpenProvider({ children }) {
         setCreateChannelModalOpen,
         workspaceLinkModalOpen,
         setWorkspaceLinkModalOpen,
+        userProfileModalOpen,
+        setUserProfileModalOpen
       }}
     >
       {children}
