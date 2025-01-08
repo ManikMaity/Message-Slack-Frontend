@@ -7,15 +7,17 @@ import CombinedContext from "@/utils/CombinedContext";
 import { ModalInitialValuesProvider } from "./ModalInitialValuesContext";
 import { WorkspaceDataContextProvider } from "./WorkspaceDataContext";
 import { SocketProvider } from "./SocketContext";
+import { ChannelMessageProvider } from "./ChannelMessageContext";
 
 const CombinedContextProvier = CombinedContext(
+  ChannelMessageProvider,
   SocketProvider,
   AuthProvider,
   CreateWorkspaceProvider,
   SidebarProvider,
   ModalOpenProvider,
   ModalInitialValuesProvider,
-  WorkspaceDataContextProvider
+  WorkspaceDataContextProvider,
 );
 
 function AppContextProvider({ children }) {

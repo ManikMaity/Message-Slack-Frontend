@@ -1,0 +1,15 @@
+h1 {
+    font-size: larger;
+}
+
+h2 {
+    font-size: large;
+}
+
+.ql-code-block-container{
+    background-color: #0d0d0d;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    color: white;
+}

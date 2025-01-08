@@ -22,7 +22,7 @@ function WorkSpaceLayout({ children }) {
       <div className="flex h-[94%] relative">
         {!mainSidebarOpen && (
           <Button
-            className="absolute bottom-40 left-1"
+            className="absolute bottom-40 left-1 z-20"
             size="sm"
             variant="outline"
             onClick={() => setMainSidebarOpen(true)}
