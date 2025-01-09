@@ -66,7 +66,7 @@ function Signin({
               <Label htmlFor="name">Email</Label>
               <Input
                 id="email"
-                placeholder="manikmaity@gmail.com"
+                placeholder="Email"
                 value={signinFormData.email}
                 required={true}
                 onChange={(e) =>
@@ -83,7 +83,7 @@ function Signin({
                 <Input
                   type={hidePassword ? "password" : "text"}
                   id="password"
-                  placeholder="manikmaity"
+                  placeholder="Password"
                   value={signinFormData.password}
                   required={true}
                   onChange={(e) =>
@@ -101,6 +101,8 @@ function Signin({
                 </Button>
               </div>
             </div>
+
+            <p className="text-sm text-muted-foreground">Email : manikmaity@gmail.com | Password : manikmaity</p>
 
             <Link to="/forgetPassword" className="ml-auto inline-block text-sm underline">
               Forgot your password?

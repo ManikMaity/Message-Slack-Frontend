@@ -41,4 +41,10 @@ export default defineConfig({
 
 
 More feature -> 
-- Disable add to accepting add to workspace
+- Image upload for message 
+- Reaction to message
+- Reply  to message
+- Scroll to get more message
+- DM
+- Delete and edit message
+- Add AI Agent Chat
