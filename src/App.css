@@ -47,6 +47,12 @@ canvas {
   overflow-y: scroll !important;
 }
 
+.ql-tooltip{
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+}
+
 .ql-editor {
   line-height: 1.5 !important;
   padding: 8px 12px !important;
