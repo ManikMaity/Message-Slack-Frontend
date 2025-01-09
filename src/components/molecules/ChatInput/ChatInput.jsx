@@ -9,12 +9,13 @@ function ChatInput() {
   const { id } = useParams();
   const { auth } = useAuthContext();
 
-  function handleSubmit({ editorContent }) {
+  function handleSubmit({ editorContent, image }) {
     const jsonContent = JSON.stringify(editorContent);
     console.log(jsonContent);
     socket?.emit("NewMessage", {
       channelId: currentChannel,
       text: jsonContent,
+      image,
       senderId: auth?.user?._id,
       workspaceId: id,
     }, (data) => {

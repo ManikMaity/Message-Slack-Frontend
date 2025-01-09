@@ -1,4 +1,5 @@
 import {
+  deleteObject,
   getDownloadURL,
   getStorage,
   ref,
@@ -7,17 +8,25 @@ import {
 import { useState } from "react";
 
 import app from "@/config/firebase";
+import { getImagePathFromFirebaseImageUrl } from "@/utils/dataFormater";
 
 function useUploadImage() {
   const [imageUrl, setImageUrl] = useState(null);
   const [loadingPercentage, setLoadingPercentage] = useState(0);
   const [error, setError] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isDeleteSuccess, setIsDeleteSuccess] = useState(false);
+  const [isDeleteError, setIsDeleteError] = useState(false);
+  const [isDeletingImage, setIsDeletingImage] = useState(false);
+
 
   const storage = getStorage(app);
 
   async function uploadImageToFirebase(file) {
     if (!file) return;
+    setError(null);
+    setIsError(false);
     setIsUploading(true);
     try {
       const fileName = new Date().getTime() + file.name;
@@ -37,18 +46,39 @@ function useUploadImage() {
         },
         (error) => {
           setError(error);
+          setIsError(true);
           console.log(error, "Error while uploading image");
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUrl(downloadURL);
+            setIsUploading(false);
           });
         }
       );
     } catch (error) {
       setError(error);
-    } finally {
+      setIsError(true);
       setIsUploading(false);
+    }
+  }
+
+  async function deleteImageFromFirebase(url) {
+    try {
+      setIsDeletingImage(true);
+      const imagePath = getImagePathFromFirebaseImageUrl(url);
+      const storageRef = ref(storage, imagePath);
+      await deleteObject(storageRef);
+      setIsDeleteSuccess(true);
+      setIsDeleteError(false);
+      setIsDeletingImage(false);
+      console.log("Image deleted from Firebase");
+    }
+    catch (error) {
+      console.log(error);
+      setIsDeleteError(true);
+      setIsDeleteSuccess(false);
+      setIsDeletingImage(false);
     }
   }
 
@@ -58,6 +88,12 @@ function useUploadImage() {
     error,
     isUploading,
     uploadImageToFirebase,
+    isError,
+    setImageUrl,
+    deleteImageFromFirebase,
+    isDeleteSuccess,
+    isDeleteError,
+    isDeletingImage
   };
 }
 

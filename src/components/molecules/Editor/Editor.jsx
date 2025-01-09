@@ -8,6 +8,7 @@ import CustomTooltip from "@/components/atoms/Tooltip/CustomTooltip";
 import { Button } from "@/components/ui/button";
 import useUploadImage from "@/hooks/firebase/useUploadImage";
 import { Progress } from "@/components/ui/progress"
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
 
 function Editor({
@@ -30,15 +31,25 @@ function Editor({
     loadingPercentage,
     error,
     isUploading,
+    isError,
+    setImageUrl,
     uploadImageToFirebase,
+    deleteImageFromFirebase,
+    isDeletingImage
   } = useUploadImage();
 
-  useEffect(() => {
-    console.log(imageFile);
-    if (imageFile) {
-      uploadImageToFirebase(imageFile);
-    }
-  }, [imageFile]);
+  async function handleImageUpload() {
+    await uploadImageToFirebase(imageFile);
+    imageInputRef.current.value = null;
+  }
+
+  async function handleImageCancel () {
+    if (!imageUrl) return;
+    await deleteImageFromFirebase(imageUrl);
+    setImageUrl(null);
+    setImageFile(null);
+  }
+
 
   function toogleToolbar() {
     const toolbar = containerRef.current.querySelector(".ql-toolbar");
@@ -48,8 +59,11 @@ function Editor({
   function handleSend() {
     if (quillRef.current) {
       const data = quillRef.current?.getContents();
-      onSubmit({ editorContent: data });
+      const image = imageUrl;
+      onSubmit({ editorContent: data, image });
       quillRef.current.setText("");
+      setImageUrl(null);
+      setImageFile(null);
     }
   }
 
@@ -114,17 +128,36 @@ function Editor({
     };
   }, []);
 
+  useEffect(() => {
+    if (!imageFile) return;
+    setImageUrl(null);
+    console.log(imageFile);
+    if (imageFile) {
+      handleImageUpload();
+    }
+  }, [imageFile]);
+
+
+  useEffect(() => {
+    console.log(imageUrl);
+    console.log(error);
+    console.log(isUploading);
+    console.log(loadingPercentage);
+    console.log(isError);
+  }, [error, imageUrl, isError, isUploading, loadingPercentage]);
+
   return (
     <div className="flex flex-col md:p-1 relative">
-      <div className="h-20 w-20 rounded-md overflow-hidden shadow-md absolute z-20 border-2 mb-2 -top-20 bg-gray-200 dark:bg-gray-800">
-        <Button className="absolute top-1 right-1" size="xs" variant="outline"><X/></Button>
-        <Progress className="w-[90%] mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" value={5}/>
-        {/* <img
+      {imageFile && <div className="h-20 w-20 rounded-md overflow-hidden shadow-md absolute z-20 border-2 mb-2 -top-20 bg-gray-200 dark:bg-gray-800">
+        <Button className="absolute top-1 right-1" size="xs" variant="outline" onClick={handleImageCancel} ><X/></Button>
+        { isUploading && <Progress className="w-[90%] mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" value={loadingPercentage}/>}
+        {isError && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">{getErrorMessage(error)}</div>}
+        {imageUrl && <img
         className="size-full"
-          src="https://firebasestorage.googleapis.com/v0/b/opendoor-db7d9.appspot.com/o/1732172634064images%20(2).jpg?alt=media&token=dabbdaab-60e1-4dfa-93ef-ef12ee026df2"
+          src={imageUrl}
           alt="uploaded image"
-        /> */}
-      </div>
+        />}
+      </div>}
       <input
         type="file"
         accept="image/*"
@@ -145,6 +178,7 @@ function Editor({
               <Button
                 variant={"ghost"}
                 size="sm"
+                disabled={isUploading || isDeletingImage}
                 onClick={() => imageInputRef.current?.click()}
               >
                 <ImageIcon />
