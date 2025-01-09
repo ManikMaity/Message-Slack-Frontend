@@ -20,7 +20,6 @@ function useUploadImage() {
   const [isDeleteError, setIsDeleteError] = useState(false);
   const [isDeletingImage, setIsDeletingImage] = useState(false);
 
-
   const storage = getStorage(app);
 
   async function uploadImageToFirebase(file) {
@@ -64,6 +63,14 @@ function useUploadImage() {
   }
 
   async function deleteImageFromFirebase(url) {
+    if (
+      !url ||
+      !url.startsWith(
+        "https://firebasestorage.googleapis.com/v0/b/opendoor-db7d9.appspot.com/o/"
+      )
+    )
+      return;
+
     try {
       setIsDeletingImage(true);
       const imagePath = getImagePathFromFirebaseImageUrl(url);
@@ -73,8 +80,7 @@ function useUploadImage() {
       setIsDeleteError(false);
       setIsDeletingImage(false);
       console.log("Image deleted from Firebase");
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
       setIsDeleteError(true);
       setIsDeleteSuccess(false);
@@ -93,7 +99,7 @@ function useUploadImage() {
     deleteImageFromFirebase,
     isDeleteSuccess,
     isDeleteError,
-    isDeletingImage
+    isDeletingImage,
   };
 }
 

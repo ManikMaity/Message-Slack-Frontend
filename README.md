@@ -41,8 +41,11 @@ export default defineConfig({
 
 
 More feature -> 
-- Image upload for message 
+- Image upload for message ✔️
 - Reaction to message
+- Edit user profile
+- Workspace Image
+- Edit message
 - Reply  to message
 - Scroll to get more message
 - DM
