@@ -12,3 +12,12 @@ export async function updateUserProfile( data ) {
         throw error.response.data;
     }
 }
+
+export async function sendVerifyEmail(email) {
+    try {
+        const response = await axios.post("/user/resend-verifyEmail", { email });
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+}

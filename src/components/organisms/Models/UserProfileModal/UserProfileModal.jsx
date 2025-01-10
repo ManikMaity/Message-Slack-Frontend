@@ -1,23 +1,15 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
-import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import { useEffect, useRef, useState } from "react";
-import TextEdit from "@/components/atoms/TextEdit/TextEdit";
-import { BadgeCheck, Edit2, Mail } from "lucide-react";
+
+import useAuthContext from "@/hooks/apis/context/useAuthContext";
+import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
+import useSendVerifyEmail from "@/hooks/apis/user/useSendVerifyEmail";
+import useUpdateUserAvatar from "@/hooks/apis/user/useUpdateUserAvatar";
 import useUpdateUsername from "@/hooks/apis/user/useUpdateUsername";
 import useUploadImage from "@/hooks/firebase/useUploadImage";
-import { Progress } from "@/components/ui/progress";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
-import useUpdateUserAvatar from "@/hooks/apis/user/useUpdateUserAvatar";
+
+import UserProfileModalContent from "./UserProfileModalContent";
 
 function UserProfileModal() {
   const { userProfileModalOpen, setUserProfileModalOpen } =
@@ -39,14 +31,22 @@ function UserProfileModal() {
     setImageUrl,
     uploadImageToFirebase,
     deleteImageFromFirebase,
-    isDeletingImage,
   } = useUploadImage();
-  const { updateAvatarMutateAsync, isPending: updateAvatarPending } =
+  const { updateAvatarMutateAsync } =
     useUpdateUserAvatar();
+  const {
+    sendVerifyEmailMutateAsync,
+    isPending: verifyEmailSentPending,
+    isSuccess: verifyEmailSentSuccess,
+  } = useSendVerifyEmail();
 
   async function updateUsername(e) {
     e.preventDefault();
     await updateUsernameMutateAsync(userData?.username);
+  }
+
+  async function sendVerifyEmail() {
+    await sendVerifyEmailMutateAsync(userData?.email);
   }
 
   async function updateAvatar(imageUrl) {
@@ -98,77 +98,23 @@ function UserProfileModal() {
   console.log("user data", userData);
 
   return (
-    <Dialog
-      open={userProfileModalOpen}
-      onOpenChange={() => {
-        setUserProfileModalOpen(false);
-      }}
-    >
-      <DialogContent className="max-w-[600px] w-[95%]">
-        <DialogHeader>
-          <DialogTitle className="text-2xl">Profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4 text-sm">
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            ref={imageInputRef}
-            onChange={(e) => setImageFile(e.target.files[0])}
-          />
-          <div className="w-20 h-20 rounded-full relative overflow-hidden border-2 mx-auto bg-slate-800">
-            <button
-              disabled={isUploading}
-              onClick={() => imageInputRef.current.click()}
-              className={`bg-black/50 h-full ${
-                isUploading ? "cursor-not-allowed hidden" : ""
-              } opacity-0 hover:opacity-100 cursor-pointer transition-all grid place-content-center rounded-full absolute z-10 w-full top-0 left-0`}
-            >
-              <Edit2 />
-            </button>
-            {isUploading && (
-              <div className="absolute size-full top-0 left-0 flex items-center justify-center bg-black/90 rounded-full">
-                <Progress value={loadingPercentage} className="w-[90%]" />
-              </div>
-            )}
-            <img
-              src={userData?.avatar}
-              alt="avatar"
-              className="size-full z-0"
-            />
-          </div>
-
-          <TextEdit
-            showInput={showUserNameInput}
-            setShowInput={setShowUserNameInput}
-            onSubmitFn={updateUsername}
-            values={userData?.username}
-            setValues={(v) => setUserData({ ...userData, username: v })}
-            submitLoading={updateUsernamePending}
-            label={"Username"}
-          />
-          <div className="py-3 px-4 border flex items-center gap-2 border-input rounded-md leading-none">
-            <Mail />
-            <p>{userData?.email}</p>
-          </div>
-          {!userData?.isVerified ? (
-            <Button variant="outline">
-              <Mail />
-              <p>Verify Your Email</p>
-            </Button>
-          ) : (
-            <p className="text-green-500 mx-auto flex items-center justify-center gap-2 mt-2">
-              <BadgeCheck />
-              Verified User
-            </p>
-          )}
-        </div>
-        <DialogFooter></DialogFooter>
-      </DialogContent>
-    </Dialog>
+   <UserProfileModalContent
+    userProfileModalOpen={userProfileModalOpen}
+    setUserProfileModalOpen={setUserProfileModalOpen}
+    imageInputRef={imageInputRef}
+    setImageFile={setImageFile}
+    isUploading={isUploading}
+    loadingPercentage={loadingPercentage}
+    userData={userData}
+    setUserData={setUserData}
+    showUserNameInput={showUserNameInput}
+    setShowUserNameInput={setShowUserNameInput}
+    updateUsername={updateUsername}
+    updateUsernamePending={updateUsernamePending}
+    sendVerifyEmail={sendVerifyEmail}
+    verifyEmailSentPending={verifyEmailSentPending}
+    verifyEmailSentSuccess={verifyEmailSentSuccess}
+   />
   );
 }
 

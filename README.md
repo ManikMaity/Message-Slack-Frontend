@@ -43,7 +43,8 @@ export default defineConfig({
 More feature -> 
 - Image upload for message ✔️
 - Reaction to message
-- Edit user profile
+- Edit user profile ✔️
+- Verify user - > send verify email ✔️ | verify email page ⭕
 - Workspace Image
 - Edit message
 - Reply  to message
