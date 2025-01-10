@@ -45,10 +45,10 @@ More feature ->
 - Reaction to message
 - Edit user profile ✔️
 - Verify user - > send verify email ✔️ | verify email page ⭕
-- Workspace Image
+- Workspace Image 
 - Edit message
 - Reply  to message
 - Scroll to get more message
 - DM
-- Delete and edit message
+- Delete message ✔️ 
 - Add AI Agent Chat

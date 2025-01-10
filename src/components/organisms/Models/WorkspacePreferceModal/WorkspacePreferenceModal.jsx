@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import useModalInitialValueContext from "@/hooks/apis/context/useModalInitialValueContext";
 import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 import useDeleteWorkspace from "@/hooks/apis/workspaces/useDeleteWorkspace";
 import useUpdateWorkspace from "@/hooks/apis/workspaces/useUpdateWorkspace";
+import useUploadImage from "@/hooks/firebase/useUploadImage";
+import { toast } from "@/hooks/use-toast";
+import useConfirm from "@/hooks/useConfirm";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
 import WorkspacePreferenceModalContent from "./WorkspacePreferenceModalContent";
-import useConfirm from "@/hooks/useConfirm";
 
 function WorkspacePreferenceModal() {
   const { workspacePreferencesVlaue } = useModalInitialValueContext();
@@ -42,6 +45,65 @@ function WorkspacePreferenceModal() {
     setShowNameInput(false);
   }
 
+
+  const imageInputRef = useRef(null);
+  const [imageFile, setImageFile] = useState(null);
+  const {
+    imageUrl,
+    loadingPercentage,
+    error,
+    isUploading,
+    isError,
+    setImageUrl,
+    uploadImageToFirebase,
+    deleteImageFromFirebase,
+  } = useUploadImage();
+
+
+  useEffect(() => {
+    if (imageFile) {
+      console.log("%crendered", "color: red");
+      handleImageUpload();
+    }
+  }, [imageFile]);
+
+
+  useEffect(() => {
+    if (isError && error) {
+      toast({
+        title: "Error while uploading profile image",
+        description: getErrorMessage(error),
+      });
+    }
+  }, [isError]);
+
+  useEffect(() => {
+    if (imageFile) {
+      console.log("image file", imageFile);
+    }
+  }, [imageFile]);
+
+  async function handleImageUpload() {
+    if (!imageFile) return;
+    setImageUrl(null);
+    await uploadImageToFirebase(imageFile);
+    imageInputRef.current.value = null;
+    setImageFile(null);
+  }
+
+  async function handleUpdateWorkspaceImage() {
+    const prevImage = values?.image;
+    await updateWorkspaceMutateAsync({id : values?._id, data : {image : imageUrl}});
+    await deleteImageFromFirebase(prevImage);
+  }
+
+
+  useEffect(() => {
+    if (imageUrl) {
+      handleUpdateWorkspaceImage();
+    }
+  }, [imageUrl]);
+
   return (
     <WorkspacePreferenceModalContent
       wsPreferenceModalOpen={wsPreferenceModalOpen}
@@ -55,6 +117,10 @@ function WorkspacePreferenceModal() {
       handleWorkspaceNameChange={handleWorkspaceNameChange}
       updateWorkspacePending={updateWorkspacePending}
       ConfirmAlert={ConfirmAltert}
+      imageInputRef={imageInputRef}
+      setImageFile={setImageFile}
+      isUploading={isUploading}
+      loadingPercentage={loadingPercentage}
     />
   );
 }

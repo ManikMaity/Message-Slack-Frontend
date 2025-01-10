@@ -25,20 +25,19 @@ export function CreateWorkspaceModal() {
     name: "",
     description: "",
   });
-  const [image, setImage] = useState(null);
   const { createWorkspaceMutateAsync, isPending } = useCreateWorkspace();
 
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
+      
       const data = await createWorkspaceMutateAsync({
         ...workspaceData,
-        image,
       });
       setWorkspaceData({ name: "", description: "" });
-      setImage(null);
       setOpenCreateModal(false);
-      navigator(`/workspace/${data?._id}`);
+      console.log(data);
+      navigator(`/workspace/${data?._id}/channel/${data?.channels[0]?._id}`);
     } catch (error) {
       toast({
         title: "Error",
@@ -83,15 +82,6 @@ export function CreateWorkspaceModal() {
               setWorkspaceData((p) => ({ ...p, description: e.target.value }))
             }
             className="mb-2 mt-1"
-            placeholder="Enter workspace description"
-          />
-          <Label htmlFor="workspace-img">Workspace Image (optional)</Label>
-          <Input
-            type="file"
-            accept="image/*"
-            id="workspace-img"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="mb-4 mt-1"
             placeholder="Enter workspace description"
           />
           <Button disabled={isPending} className="w-full" type="submit">
