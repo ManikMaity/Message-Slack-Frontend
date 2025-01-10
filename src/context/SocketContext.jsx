@@ -12,10 +12,20 @@ export const SocketProvider = ({ children }) => {
   const socket = io(BACKEND_SOCKET_URL, { transports: ["websocket"] });
 
   socket.on("NewMessageReceived", (data) => {
-    console.log('Data rendererd');
+    console.log("Data rendererd");
     setChannelMessages((prev) => {
       return [...prev, data];
     });
+  });
+
+  socket.on("EditedMessageReceived", (data) => {
+    console.log(data, "EditedMessageReceived");
+    setChannelMessages((prev) => prev.map((item) => {
+      if (item._id === data._id) {
+        return data;
+      }
+      return item;
+    }));
   });
 
   async function joinChannel({ channelId }) {
