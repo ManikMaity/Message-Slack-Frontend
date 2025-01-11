@@ -44,8 +44,8 @@ More feature ->
 - Image upload for message ✔️
 - Reaction to message
 - Edit user profile ✔️
-- Verify user - > send verify email ✔️ | verify email page ⭕
-- Workspace Image 
+- Verify user - > send verify email ✔️ | verify email page ✔️
+- Workspace Image ✔️
 - Edit message
 - Reply  to message
 - Scroll to get more message

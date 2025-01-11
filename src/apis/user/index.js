@@ -21,3 +21,15 @@ export async function sendVerifyEmail(email) {
         throw error.response.data;
     }
 }
+
+export async function verifyEmail(token) {
+    try {
+        const response = await axios.get(`user/verifyEmail/${token}`);
+        return response.data;
+    }
+    catch(error){
+        throw error.response.data;
+    }
+}
+
+

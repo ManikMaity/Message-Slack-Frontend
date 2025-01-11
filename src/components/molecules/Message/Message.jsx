@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import useSocketContext from "@/hooks/apis/context/useSocketContext";
 import { toast } from "@/hooks/use-toast";
 import useUploadImage from "@/hooks/firebase/useUploadImage";
+import Reaction from "@/components/atoms/Reaction/Reaction";
 
 const data = {
   _id: "677e1a86354df5b9dc72be63",
@@ -77,12 +78,15 @@ function Message({ messageData = data }) {
 
   return (
     <div
-      className={`w-full px-2 md:px-4 py-2 my-2 bg-transparent flex ${
+      className={`w-full px-2 md:px-4 relative py-2 my-2 bg-transparent flex ${
         messageData?.senderId?._id === auth?.user?._id
           ? "justify-end"
           : "justify-start"
       } gap-2 hover:bg-gray-200 dark:hover:bg-slate-800 group text-black text-sm dark:text-white`}
     >
+      {  messageData?.senderId?._id !== auth?.user?._id && <div className="absolute right-5 -top-5">
+        <Reaction />
+      </div>}
       <Avatar className="rounded-md shadow-sm bg-gray-400 dark:bg-slate-950">
         <AvatarImage src={messageData?.senderId?.avatar} />
         <AvatarFallback className="rounded-md bg-gray-600 text-sm">

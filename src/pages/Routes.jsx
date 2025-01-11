@@ -11,6 +11,7 @@ import Workspaces from "@/pages/workspace/Workspaces";
 
 import Home from "./Home";
 import PrivateRoute from "./PrivateRoute";
+import VerifyUserEmail from "./user/VerifyUserEmail";
 import JoinWorkspaceByCode from "./workspace/JoinWorkspaceByCode";
 import WorkSpaceLayout from "./workspace/Layout";
 
@@ -49,13 +50,27 @@ export function AppRoutes() {
           </Auth>
         }
       />
+      <Route path="/verifyemail/:hash" element={<VerifyUserEmail />} />
       <Route element={<PrivateRoute />}>
         <Route path="/workspaces" element={<Workspaces />} />
-        <Route path="/workspace/:id" element={<WorkSpaceLayout>Workspace</WorkSpaceLayout>}/>
-        <Route path="/workspace/:id/channel/:channelId" element={<WorkSpaceLayout><ChannelLayout/></WorkSpaceLayout>}/>
-        <Route path="/workspace/join/:joinCode" element={<JoinWorkspaceByCode/>}/>
+        <Route
+          path="/workspace/:id"
+          element={<WorkSpaceLayout>Workspace</WorkSpaceLayout>}
+        />
+        <Route
+          path="/workspace/:id/channel/:channelId"
+          element={
+            <WorkSpaceLayout>
+              <ChannelLayout />
+            </WorkSpaceLayout>
+          }
+        />
+        <Route
+          path="/workspace/join/:joinCode"
+          element={<JoinWorkspaceByCode />}
+        />
       </Route>
-      <Route path="/" element={<Home/>} />
+      <Route path="/" element={<Home />} />
       <Route path="/*" element={<NotFound />} />
     </Routes>
   );

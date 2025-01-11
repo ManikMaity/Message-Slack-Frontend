@@ -25,6 +25,7 @@ return <div>
   {isSuccess && workspacesData?.data?.map(workspace => (
     <div key={workspace._id}>{workspace.name}</div>
   ))}
+   
 </div>;
 }
 

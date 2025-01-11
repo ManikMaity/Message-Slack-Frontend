@@ -1,7 +1,5 @@
 import axios from "@/config/axios.config";
 
-const slack_token = localStorage.getItem("access-token");
-
 export async function getAllUserWorkspaces() {
   try {
     const response = await axios.get("/workspace", {
@@ -71,7 +69,7 @@ export async function updateWorkspace({ id, data }) {
   try {
     const response = await axios.post(`/workspace/update/${id}`, data, {
       headers: {
-        slack_token,
+        slack_token : localStorage.getItem("access-token"),
       },
     });
 
@@ -91,7 +89,7 @@ export async function addChannelToWorkspace({ channelName, workspaceId }) {
       },
       {
         headers: {
-          slack_token,
+          slack_token : localStorage.getItem("access-token"),
         },
       }
     );
@@ -109,7 +107,7 @@ export async function changeWorkspaceJoinCode({ workspaceId }) {
       {},
       {
         headers: {
-          slack_token,
+          slack_token : localStorage.getItem("access-token"),
         },
       }
     );
@@ -127,7 +125,7 @@ export async function joinWorkspaceByJoinCode({ joinCode }) {
       {},
       {
         headers: {
-          slack_token,
+          slack_token : localStorage.getItem("access-token"),
         },
       }
     );
@@ -143,7 +141,7 @@ export async function getChannelDetails({ channelId }) {
     
     const response = await axios.get(`/channel/${channelId}`, {
       headers: {
-        slack_token,
+        slack_token : localStorage.getItem("access-token"),
       },
     });
 
