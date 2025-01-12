@@ -29,7 +29,7 @@ function ChannelLayout() {
     isError: messageIsError,
   } = useFetchChannelMessage({ channelId, page, limit });
   const { channelMessages, setChannelMessages } = useChannelMessageContext();
-  const { joinChannel } = useSocketContext();
+  const { joinChannel, leaveChannel } = useSocketContext();
   const messageContainerRef = useRef(null);
 
   useEffect(() => {
@@ -41,9 +41,12 @@ function ChannelLayout() {
 
   useEffect(() => {
     if (!isLoading && !isError) {
-      console.log(channelId, joinChannel);
       joinChannel({ channelId });
     }
+
+    return () => {
+      leaveChannel({ channelId });
+    };
   }, [isLoading, isError, channelId]);
 
   useEffect(() => {

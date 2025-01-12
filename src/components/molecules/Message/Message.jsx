@@ -15,6 +15,8 @@ import useSocketContext from "@/hooks/apis/context/useSocketContext";
 import { toast } from "@/hooks/use-toast";
 import useUploadImage from "@/hooks/firebase/useUploadImage";
 import Reaction from "@/components/atoms/Reaction/Reaction";
+import ReactionsRender from "@/components/atoms/Reaction/ReactionsRender";
+import { getErrorMessage } from "@/utils/getErrorMessage";
 
 const data = {
   _id: "677e1a86354df5b9dc72be63",
@@ -37,7 +39,6 @@ function Message({ messageData = data }) {
   const { socket } = useSocketContext();
   const { deleteImageFromFirebase } = useUploadImage();
 
-  console.log(messageData);
 
   async function handleDeleteMessage() {
     const confirm = window.confirm(
@@ -76,6 +77,30 @@ function Message({ messageData = data }) {
     );
   }
 
+  function onReactionClick(reaction) {
+    socket.emit(
+      "NewMessageLike",
+      {
+        workspaceId: messageData?.workspaceId,
+        messageId: messageData?._id,
+        channelId: messageData?.channelId,
+        token: auth?.token,
+        likeContent: reaction,
+      },
+      (data) =>  {
+        if (data?.success) {
+          toast({
+            description: "Reaction added successfully",
+          });
+        } else {
+          toast({
+            description: getErrorMessage(data) || "Error while liking message",
+          });
+        }
+      }
+    );
+  }
+
   return (
     <div
       className={`w-full px-2 md:px-4 relative py-2 my-2 bg-transparent flex ${
@@ -84,9 +109,11 @@ function Message({ messageData = data }) {
           : "justify-start"
       } gap-2 hover:bg-gray-200 dark:hover:bg-slate-800 group text-black text-sm dark:text-white`}
     >
-      {  messageData?.senderId?._id !== auth?.user?._id && <div className="absolute right-5 -top-5">
-        <Reaction />
-      </div>}
+      {messageData?.senderId?._id !== auth?.user?._id && (
+        <div className="absolute group-hover:block hidden right-5 -top-5">
+          <Reaction onClickFn={onReactionClick} />
+        </div>
+      )}
       <Avatar className="rounded-md shadow-sm bg-gray-400 dark:bg-slate-950">
         <AvatarImage src={messageData?.senderId?.avatar} />
         <AvatarFallback className="rounded-md bg-gray-600 text-sm">
@@ -124,7 +151,12 @@ function Message({ messageData = data }) {
             <MessageImageThumbnail url={messageData?.image} />
           )}
           {messageData?.text && messageData?.text !== "dlMessage" && (
-            <MessageRenderer value={messageData?.text} />
+            <>
+              <MessageRenderer value={messageData?.text} />
+              {messageData?.likes?.length >= 1 && <div className="mt-2">
+                <ReactionsRender reactions={messageData?.likes} />
+              </div>}
+            </>
           )}
           {messageData?.text === "dlMessage" && (
             <p className="text-sm bg-gray-300/40 dark:bg-slate-600/60 px-2 py-1 rounded-md">

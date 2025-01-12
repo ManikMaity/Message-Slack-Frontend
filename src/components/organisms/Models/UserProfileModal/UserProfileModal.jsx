@@ -71,7 +71,6 @@ function UserProfileModal() {
 
   useEffect(() => {
     if (imageFile) {
-      console.log("%crendered", "color: red");
       handleImageUpload();
     }
   }, [imageFile]);
@@ -89,13 +88,6 @@ function UserProfileModal() {
     }
   }, [isError]);
 
-  useEffect(() => {
-    if (imageFile) {
-      console.log("image file", imageFile);
-    }
-  }, [imageFile]);
-
-  console.log("user data", userData);
 
   return (
    <UserProfileModalContent

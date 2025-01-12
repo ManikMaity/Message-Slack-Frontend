@@ -131,20 +131,11 @@ function Editor({
   useEffect(() => {
     if (!imageFile) return;
     setImageUrl(null);
-    console.log(imageFile);
     if (imageFile) {
       handleImageUpload();
     }
   }, [imageFile]);
 
-
-  useEffect(() => {
-    console.log(imageUrl);
-    console.log(error);
-    console.log(isUploading);
-    console.log(loadingPercentage);
-    console.log(isError);
-  }, [error, imageUrl, isError, isUploading, loadingPercentage]);
 
   return (
     <div className="flex flex-col md:p-1 relative">

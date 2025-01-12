@@ -5,7 +5,6 @@ export function MessageRenderer({ value }) {
   const renderRef = useRef(null);
 
   useEffect(() => {
-    console.log("Value: ", value);
     if (!renderRef.current) return;
     const renderQuill = new Quill(document.createElement("div"), {
       theme: "snow",
@@ -19,10 +18,9 @@ export function MessageRenderer({ value }) {
       renderRef.current.innerHTML = "No content";
       return;
     }
-    console.log("Content: ", renderQuill.root.innerHTML);
     renderRef.current.innerHTML = renderQuill.root.innerHTML;
   }, [value]);
 
-  return <div className="ql-editor ql-renderer" ref={renderRef} />;
+  return <div className="ql-renderer" ref={renderRef} />;
 }
 

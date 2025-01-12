@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import VerifyUserEmail from "./user/VerifyUserEmail";
 import JoinWorkspaceByCode from "./workspace/JoinWorkspaceByCode";
 import WorkSpaceLayout from "./workspace/Layout";
+import MemberLayout from "@/components/organisms/Member/MemberLayout";
 
 export function AppRoutes() {
   return (
@@ -65,6 +66,9 @@ export function AppRoutes() {
             </WorkSpaceLayout>
           }
         />
+        <Route path="/workspace/:id/member/:memberId"
+          element={<WorkSpaceLayout><MemberLayout/></WorkSpaceLayout>}
+          />
         <Route
           path="/workspace/join/:joinCode"
           element={<JoinWorkspaceByCode />}

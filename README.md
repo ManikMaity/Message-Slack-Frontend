@@ -42,13 +42,15 @@ export default defineConfig({
 
 More feature -> 
 - Image upload for message ✔️
-- Reaction to message
+- Reaction to message ✔️
 - Edit user profile ✔️
 - Verify user - > send verify email ✔️ | verify email page ✔️
 - Workspace Image ✔️
+- Leave Workspace by user
+- All user and admin remove member
 - Edit message
 - Reply  to message
 - Scroll to get more message
-- DM
+- DM ⭕
 - Delete message ✔️ 
 - Add AI Agent Chat
