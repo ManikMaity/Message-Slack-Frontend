@@ -19,7 +19,7 @@ import { toast } from "@/hooks/use-toast";
 
 function WorkspaceContentPanel() {
   const { id } = useParams();
-  const { channelId } = useParams();
+  const { channelId, memberId } = useParams();
   const { workspaceData, isLoading, isError, error, refetch } =
     useGetWorkspaceData(id);
   const { setWorkspaceData } = useWorkspaceDataContext();
@@ -113,6 +113,7 @@ function WorkspaceContentPanel() {
               memberId={member?._id}
               image={member?.member?.avatar}
               role={member?.role}
+              variant={memberId === member?._id ? "active" : "default"}
             />
           ))}
           <Button

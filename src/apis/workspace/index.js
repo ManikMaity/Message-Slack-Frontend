@@ -69,7 +69,7 @@ export async function updateWorkspace({ id, data }) {
   try {
     const response = await axios.post(`/workspace/update/${id}`, data, {
       headers: {
-        slack_token : localStorage.getItem("access-token"),
+        slack_token: localStorage.getItem("access-token"),
       },
     });
 
@@ -89,7 +89,7 @@ export async function addChannelToWorkspace({ channelName, workspaceId }) {
       },
       {
         headers: {
-          slack_token : localStorage.getItem("access-token"),
+          slack_token: localStorage.getItem("access-token"),
         },
       }
     );
@@ -107,7 +107,7 @@ export async function changeWorkspaceJoinCode({ workspaceId }) {
       {},
       {
         headers: {
-          slack_token : localStorage.getItem("access-token"),
+          slack_token: localStorage.getItem("access-token"),
         },
       }
     );
@@ -125,7 +125,7 @@ export async function joinWorkspaceByJoinCode({ joinCode }) {
       {},
       {
         headers: {
-          slack_token : localStorage.getItem("access-token"),
+          slack_token: localStorage.getItem("access-token"),
         },
       }
     );
@@ -138,15 +138,31 @@ export async function joinWorkspaceByJoinCode({ joinCode }) {
 
 export async function getChannelDetails({ channelId }) {
   try {
-    
     const response = await axios.get(`/channel/${channelId}`, {
       headers: {
-        slack_token : localStorage.getItem("access-token"),
+        slack_token: localStorage.getItem("access-token"),
       },
     });
 
     return response?.data?.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+}
 
+export async function leaveWorkspace(workspaceId) {
+  try {
+    const response = await axios.post(
+      `/workspace/leave/${workspaceId}`,
+      {},
+      {
+        headers: {
+          slack_token: localStorage.getItem("access-token"),
+        },
+      }
+    );
+
+    return response?.data;
   } catch (err) {
     throw err.response.data;
   }

@@ -12,11 +12,22 @@ import {
 import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import useModalInitialValueContext from "@/hooks/apis/context/useModalInitialValueContext";
 import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
+import useLeaveWorkspace from "@/hooks/apis/workspaces/useLeaveWorkspace";
 
 function WorkspacePanelHeader({ workspaceData }) {
   const { setWsPreferenceModalOpen } = useModalOpenContext();
   const { setWorkspacePreferencesVlaue } = useModalInitialValueContext();
   const {setWorkspaceLinkModalOpen} = useModalOpenContext();
+  const {leaveWorkspaceMutateAync, isPending : leaveWorkspacePending} = useLeaveWorkspace();
+
+  async function handleLeaveWorkspace() {
+    const confirm = window.confirm(
+      "Are you sure you want to leave this workspace?"
+    );
+    if (!confirm) return;
+    await leaveWorkspaceMutateAync(workspaceData?._id);
+  }
+
   useEffect(() => {
     setWorkspacePreferencesVlaue(workspaceData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,8 +84,8 @@ function WorkspacePanelHeader({ workspaceData }) {
               <DropdownMenuSeparator />
             </div>
           )}
-          <DropdownMenuItem>
-            Leave {workspaceData?.name || "Workspace"}
+          <DropdownMenuItem onClick={handleLeaveWorkspace}>
+            {leaveWorkspacePending ? "Leaving..." : `Leave ${workspaceData?.name}`}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
