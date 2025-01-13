@@ -187,3 +187,21 @@ export async function makeMemberAdmin({ workspaceId, memberId }) {
     throw err.response.data;
   }
 }
+
+export async function removeMembersFromWorkspace({ memberId, workspaceId }) {
+  try {
+    const reponse = await axios.patch(
+      "/workspace/remove-member",
+      { memberId, workspaceId },
+      {
+        headers: {
+          slack_token: localStorage.getItem("access-token"),
+        },
+      }
+    );
+
+    return reponse?.data?.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+}

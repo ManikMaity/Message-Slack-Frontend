@@ -88,15 +88,11 @@ function Message({ messageData = data }) {
         likeContent: reaction,
       },
       (data) =>  {
-        if (data?.success) {
-          toast({
-            description: "Reaction added successfully",
-          });
-        } else {
+        if (!data?.success) {
           toast({
             description: getErrorMessage(data) || "Error while liking message",
           });
-        }
+        } 
       }
     );
   }

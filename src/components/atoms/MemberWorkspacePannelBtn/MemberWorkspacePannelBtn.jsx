@@ -7,6 +7,7 @@ import { CircleMinus, UserCheck } from "lucide-react";
 import CustomTooltip from "../Tooltip/CustomTooltip";
 import useMakeMemberAdmin from "@/hooks/apis/workspaces/useMakeMemberAdmin";
 import Spinner from "@/components/molecules/Spinner";
+import useRemoveMemberFromWorkspace from "@/hooks/apis/workspaces/useRemoveMemberFromWorkspace";
 
 function MemberWorkspacePannelBtn({
   variant = "default",
@@ -18,6 +19,7 @@ function MemberWorkspacePannelBtn({
 }) {
   
   const {makeMemberAdminMutateAsync, makeMemberAdminPending} = useMakeMemberAdmin();
+  const {removeMembersFromWorkspaceMutateAsync, isPending : removeMemberPending} = useRemoveMemberFromWorkspace();
 
   const memberWorkspacePannelBtnVariants = cva(
     "flex items-center justify-start gap-2 px-2 text-sm h-8 group",
@@ -37,6 +39,12 @@ function MemberWorkspacePannelBtn({
 
   async function makeMemberAdminHandler() {
     await makeMemberAdminMutateAsync({workspaceId : id, memberId : userId});
+  }
+
+  async function removeMemberHandler() {
+    const ok = confirm("Are you sure you want to remove this member from workspace?");
+    if (!ok) return;
+    await removeMembersFromWorkspaceMutateAsync({workspaceId : id, memberId : userId});
   }
 
 
@@ -60,11 +68,12 @@ function MemberWorkspacePannelBtn({
       <div className="flex gap-1">
         <CustomTooltip content="Remove Member">
           <Button
+          onClick={removeMemberHandler}
             variant="transparent"
             className="p-1 group-hover:opacity-100 opacity-0 transition-all"
             size="xs"
           >
-            <CircleMinus />
+           {removeMemberPending ? <Spinner /> : <CircleMinus />}
           </Button>
         </CustomTooltip>
         <CustomTooltip content="Make Member Admin">
