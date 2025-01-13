@@ -111,6 +111,7 @@ function WorkspaceContentPanel() {
               key={member._id}
               name={member?.member?.username}
               memberId={member?._id}
+              userId={member?.member?._id}
               image={member?.member?.avatar}
               role={member?.role}
               variant={memberId === member?._id ? "active" : "default"}

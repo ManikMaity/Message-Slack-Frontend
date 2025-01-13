@@ -167,3 +167,23 @@ export async function leaveWorkspace(workspaceId) {
     throw err.response.data;
   }
 }
+
+export async function makeMemberAdmin({ workspaceId, memberId }) {
+  try {
+    const response = await axios.post(
+      "/workspace/makeAdmin",
+      {
+        workspaceId,
+        memberId,
+      },
+      {
+        headers: {
+          slack_token: localStorage.getItem("access-token"),
+        },
+      }
+    );
+    return response?.data?.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+}
