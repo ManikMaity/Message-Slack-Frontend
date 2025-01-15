@@ -19,7 +19,7 @@ function JoinWorkspaceByCode() {
       <div className="min-h-40 flex mt-12 flex-col items-center justify-center gap-2 text-center">
         <ThumbsUp/>
         <p>Joined the workspace</p>
-        <Button onClick={() => navigator(`/workspace/${data?._id}`)}>Go To Workspace</Button>
+        <Button onClick={() => navigator(`/workspace/${data?._id}/channel/${data?.channels[0]}`)}>Go To Workspace</Button>
       </div>
     );
   }

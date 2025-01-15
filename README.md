@@ -52,6 +52,6 @@ More feature ->
 - Edit message
 - Reply  to message
 - Scroll to get more message
-- DM ⭕
+- DM ✔️
 - Delete message ✔️ 
 - Add AI Agent Chat
