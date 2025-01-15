@@ -29,7 +29,7 @@ function MemberLayout() {
   const { channelMessages, setChannelMessages } = useChannelMessageContext();
   const messageContainerRef = useRef(null);
 
-  const {handleSubmit} = useHandleDMs({memberId, roomId, workspaceId: id});
+  const {handleSubmit, handleDeleteMessage, handleRecationClick} = useHandleDMs({memberId, roomId, workspaceId: id});
 
  
   useEffect(() => {
@@ -85,7 +85,7 @@ function MemberLayout() {
             ref={messageContainerRef}
           >
             {channelMessages?.map((message) => (
-              <Message messageData={message} key={message?._id} />
+              <Message messageData={message} key={message?._id} handleDeleteMessage={handleDeleteMessage} handleReactionClick={handleRecationClick} />
             ))}
           </div>
         ) : (
