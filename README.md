@@ -48,7 +48,7 @@ More feature ->
 - Workspace Image ✔️
 - Leave Workspace by user ✔️
 - Make member admin ✔️
-- All user and admin remove member
+- All user and admin remove member ✔️
 - Edit message
 - Reply  to message
 - Scroll to get more message

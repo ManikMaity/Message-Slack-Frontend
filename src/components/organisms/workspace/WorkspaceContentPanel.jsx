@@ -114,7 +114,7 @@ function WorkspaceContentPanel() {
               userId={member?.member?._id}
               image={member?.member?.avatar}
               role={member?.role}
-              variant={memberId === member?._id ? "active" : "default"}
+              variant={memberId === member?.member?._id ? "active" : "default"}
             />
           ))}
           <Button

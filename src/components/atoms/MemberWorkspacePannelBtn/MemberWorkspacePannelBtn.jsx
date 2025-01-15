@@ -22,7 +22,7 @@ function MemberWorkspacePannelBtn({
   const {removeMembersFromWorkspaceMutateAsync, isPending : removeMemberPending} = useRemoveMemberFromWorkspace();
 
   const memberWorkspacePannelBtnVariants = cva(
-    "flex items-center justify-start gap-2 px-2 text-sm h-8 group",
+    "flex items-center justify-start gap-2 px-2 text-sm h-8 group rounded-md",
     {
       variants: {
         varient: {
@@ -53,7 +53,7 @@ function MemberWorkspacePannelBtn({
     <div className={cn(memberWorkspacePannelBtnVariants({ varient: variant }))}>
       <Link
         className="flex h-full py-1 items-center gap-2 w-full"
-        to={`/workspace/${id}/member/${memberId}`}
+        to={`/workspace/${id}/member/${userId}`}
       >
         <img
           className="rounded-sm object-cover h-[1.4rem] w-[1.4rem]"

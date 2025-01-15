@@ -34,68 +34,10 @@ const data = {
   __v: 0,
 };
 
-function Message({ messageData = data }) {
+function Message({ messageData = data, handleDeleteMessage, handleReactionClick }) {
+
   const { auth } = useAuthContext();
-  const { socket } = useSocketContext();
-  const { deleteImageFromFirebase } = useUploadImage();
 
-
-  async function handleDeleteMessage() {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this message?"
-    );
-    if (!confirm) return;
-
-    if (messageData?.image) {
-      await deleteImageFromFirebase(messageData?.image);
-    }
-
-    socket?.emit(
-      "EditMessage",
-      {
-        channelId: messageData.channelId,
-        messageId: messageData._id,
-        token: auth?.token,
-        updateContent: {
-          text: "dlMessage",
-          image: "dlImg",
-        },
-      },
-      (data) => {
-        if (data?.success) {
-          toast({
-            title: "Message Deleted",
-            description: "Message deleted successfully",
-          });
-        } else {
-          toast({
-            title: "Error",
-            description: "Error deleting message",
-          });
-        }
-      }
-    );
-  }
-
-  function onReactionClick(reaction) {
-    socket.emit(
-      "NewMessageLike",
-      {
-        workspaceId: messageData?.workspaceId,
-        messageId: messageData?._id,
-        channelId: messageData?.channelId,
-        token: auth?.token,
-        likeContent: reaction,
-      },
-      (data) =>  {
-        if (!data?.success) {
-          toast({
-            description: getErrorMessage(data) || "Error while liking message",
-          });
-        } 
-      }
-    );
-  }
 
   return (
     <div
@@ -107,7 +49,7 @@ function Message({ messageData = data }) {
     >
       {messageData?.senderId?._id !== auth?.user?._id && (
         <div className="absolute group-hover:block hidden right-5 -top-5">
-          <Reaction onClickFn={onReactionClick} />
+          <Reaction onClickFn={(reaction) => handleReactionClick(reaction, messageData)} />
         </div>
       )}
       <Avatar className="rounded-md shadow-sm bg-gray-400 dark:bg-slate-950">
@@ -136,7 +78,7 @@ function Message({ messageData = data }) {
               variant="transparent"
               className="invisible group-hover:visible"
               size="xs"
-              onClick={handleDeleteMessage}
+              onClick={() => handleDeleteMessage(messageData)}
             >
               <Trash />
             </Button>

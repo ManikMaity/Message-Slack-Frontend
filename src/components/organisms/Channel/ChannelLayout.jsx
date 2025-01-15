@@ -10,9 +10,11 @@ import { useEffect, useRef, useState } from "react";
 import useSocketContext from "@/hooks/apis/context/useSocketContext";
 import useFetchChannelMessage from "@/hooks/apis/message/useFetchChannelMessage";
 import useChannelMessageContext from "@/hooks/apis/context/useChannelMessageContext";
+import useAuthContext from "@/hooks/apis/context/useAuthContext";
+import useHandleChannelMessage from "@/hooks/message/useHandleChannelMessage";
 
 function ChannelLayout() {
-  const { channelId } = useParams();
+  const { id, channelId } = useParams();
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const {
@@ -27,10 +29,13 @@ function ChannelLayout() {
     messages,
     isLoading: messageLoading,
     isError: messageIsError,
-  } = useFetchChannelMessage({ channelId, page, limit });
+  } = useFetchChannelMessage({ channelId, workspaceId : id, page, limit });
   const { channelMessages, setChannelMessages } = useChannelMessageContext();
-  const { joinChannel, leaveChannel } = useSocketContext();
+  const { joinChannel, leaveChannel} = useSocketContext();
   const messageContainerRef = useRef(null);
+  const { auth } = useAuthContext();
+
+ const {handleSubmit, handleDeleteMessage, handleReactionClick} = useHandleChannelMessage({channelId : channelId, userId : auth?.user?._id, workspaceId : id});
 
   useEffect(() => {
     if (messageContainerRef.current) {
@@ -43,7 +48,6 @@ function ChannelLayout() {
     if (!isLoading && !isError) {
       joinChannel({ channelId });
     }
-
     return () => {
       leaveChannel({ channelId });
     };
@@ -85,7 +89,7 @@ function ChannelLayout() {
             ref={messageContainerRef}
           >
             {channelMessages?.map((message) => (
-              <Message messageData={message} key={message?._id} />
+              <Message messageData={message} key={message?._id} handleDeleteMessage={handleDeleteMessage} handleReactionClick={handleReactionClick} />
             ))}
           </div>
         ) : (
@@ -94,7 +98,7 @@ function ChannelLayout() {
           </div>
         )}
       </div>
-      <ChatInput />
+      <ChatInput handleSubmit={handleSubmit}/>
     </div>
   );
 }
