@@ -50,7 +50,7 @@ More feature ->
 - Make member admin ✔️
 - All user and admin remove member ✔️
 - Edit message
-- Reply  to message
+- Reply  to message ⭕
 - Scroll to get more message
 - DM ✔️
 - Delete message ✔️ 

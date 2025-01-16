@@ -15,6 +15,7 @@ import VerifyUserEmail from "./user/VerifyUserEmail";
 import JoinWorkspaceByCode from "./workspace/JoinWorkspaceByCode";
 import WorkSpaceLayout from "./workspace/Layout";
 import MemberLayout from "@/components/organisms/Member/MemberLayout";
+import Payment from "./payment/Payment";
 
 export function AppRoutes() {
   return (
@@ -53,6 +54,7 @@ export function AppRoutes() {
       />
       <Route path="/verifyemail/:hash" element={<VerifyUserEmail />} />
       <Route element={<PrivateRoute />}>
+      <Route path="/payment" element={<Payment />} />
         <Route path="/workspaces" element={<Workspaces />} />
         <Route
           path="/workspace/:id"

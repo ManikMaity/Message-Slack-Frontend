@@ -22,7 +22,7 @@ export async function createWorkspace({ name, description, imageUrl = null }) {
         description,
         image:
           imageUrl ??
-          "https://firebasestorage.googleapis.com/v0/b/opendoor-db7d9.appspot.com/o/pexels-hillaryfox-1595385.jpg?alt=media&token=f6237fb3-c078-4ba8-b838-6a4629c4abcc",
+          "https://picsum.photos/seed/picsum/600/600",
       },
       {
         headers: {

@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 
 const initialState = {
-  theme: "system",
+  theme: "dark",
   setTheme: () => null,
 };
 

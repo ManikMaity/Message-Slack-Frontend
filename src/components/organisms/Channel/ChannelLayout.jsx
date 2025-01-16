@@ -29,6 +29,7 @@ function ChannelLayout() {
     messages,
     isLoading: messageLoading,
     isError: messageIsError,
+    isSuccess : messageIsSuccess
   } = useFetchChannelMessage({ channelId, workspaceId : id, page, limit });
   const { channelMessages, setChannelMessages } = useChannelMessageContext();
   const { joinChannel, leaveChannel} = useSocketContext();
@@ -59,7 +60,7 @@ function ChannelLayout() {
     }
   }, [isMessageSuccess, messages, setChannelMessages, channelId]);
 
-  if (isLoading) {
+  if (isLoading || messageLoading) {
     return (
       <div className="h-full grid place-content-center">
         <Spinner />
@@ -67,7 +68,7 @@ function ChannelLayout() {
     );
   }
 
-  if (isError) {
+  if (isError || messageIsError) {
     return (
       <div>
         <DatabaseError
@@ -83,7 +84,7 @@ function ChannelLayout() {
     <div className="h-full relative flex flex-col">
       <div className="flex-1 max-h-[calc(100%-140px)]">
         <ChannelHeader name={channelData?.name} id={channelData?._id} />
-        {isMessageSuccess && channelMessages ? (
+        {isMessageSuccess && messageIsSuccess  && channelMessages ? (
           <div
             className="flex flex-col gap-1 h-[calc(100%-50px)] overflow-y-scroll"
             ref={messageContainerRef}
