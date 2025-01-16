@@ -14,8 +14,8 @@ function Payment() {
     }
 
   return (
-    <div className="h-screen w-full dark:bg-slate-950 bg-slack-dark600 flex items-center justify-center">
-      <div className="h-[90%] flex flex-col justify-evenly m-4 p-6 md:p-7 w-full max-w-md dark:bg-slate-900  bg-gray-100 rounded-lg">
+    <div className="h-full w-full dark:bg-slate-900 bg-gray-300 flex items-center justify-center">
+      <div className="h-[90%] flex flex-col justify-evenly m-4 p-6 md:p-7 w-full max-w-md dark:bg-slate-950  bg-gray-100 rounded-lg">
         <h1 className="text-2xl md:text-3xl text-center">Subscribe</h1>
 
         <div>

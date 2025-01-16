@@ -3,13 +3,21 @@ import { RAZORPAY_ID } from "@/config/clientConfig";
 import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 function usePayment() {
+  
+  const navigate = useNavigate();
 
-    const {mutateAsync : capturePaymentMutateAsync, isPending : capturePaymentPending} = useMutation({
+    const {mutateAsync : capturePaymentMutateAsync} = useMutation({
         mutationFn: capturePayment,
-        onSuccess: (data) => {
-          console.log(data);
+        onSuccess: () => {
+          toast({
+            title: "Payment successful.",
+            description: `Your payment has been successfully done.`,
+            status: "success",
+          });
+          navigate("/");
         },
         onError: (err) => {
           toast({
@@ -35,11 +43,6 @@ function usePayment() {
             handler: async (response) => {
               console.log(response);
               await capturePaymentMutateAsync({...response, amount});
-              toast({
-                title: "Payment successful.",
-                description: `Your payment has been successfully done. Id : ${response.razorpay_payment_id}`,
-                status: "success",
-              });
             },
             prefill: {
               name: "John Doe",

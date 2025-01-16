@@ -54,7 +54,7 @@ export function AppRoutes() {
       />
       <Route path="/verifyemail/:hash" element={<VerifyUserEmail />} />
       <Route element={<PrivateRoute />}>
-      <Route path="/payment" element={<Payment />} />
+      <Route path="/workspace/:id/subscribe" element={<WorkSpaceLayout><Payment /></WorkSpaceLayout>} />
         <Route path="/workspaces" element={<Workspaces />} />
         <Route
           path="/workspace/:id"

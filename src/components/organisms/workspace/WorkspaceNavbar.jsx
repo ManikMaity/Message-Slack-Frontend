@@ -1,5 +1,5 @@
 import { IndianRupee, Moon, Search, Sun } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import NavbarSkeliton from "@/components/atoms/SkeletonLoaders/NavbarSkeliton";
 import { useTheme } from "@/components/organisms/theme/theme-provider";
@@ -11,6 +11,7 @@ function WorkspaceNavbar() {
   const { id } = useParams();
   const { workspaceData, isLoading, isError } = useGetWorkspaceData(id);
   const { theme, setTheme } = useTheme();
+  const navigate = useNavigate();
 
   if (isLoading || isError) {
     return (
@@ -18,6 +19,10 @@ function WorkspaceNavbar() {
         <NavbarSkeliton />
       </div>
     );
+  }
+
+  function handleSubscribeClick() {
+    navigate(`/workspace/${id}/subscribe`);
   }
 
   return (
@@ -42,6 +47,7 @@ function WorkspaceNavbar() {
         </CustomTooltip>
         <CustomTooltip content={"Subcribe"}>
         <Button
+          onClick={handleSubscribeClick}
           variant="transparent"
           className="grid place-content-center w-6 h-6 text-gray-300 bg dark:bg-accent/60 hover:text-white bg-accent/20 rounded-full"
         >
