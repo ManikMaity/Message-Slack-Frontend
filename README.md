@@ -1,19 +1,35 @@
 <div align="center">
+    <img height="100px" width="100%" alt="Anime messaging" style="object-fit: cover;" src="./public/readmeImage.gif"/>
     <h1>Slack Clone</h1>
 </div>
 
-A real-time collaborative platform for creating and managing workspaces, channels, and private messaging, with advanced admin controls and responsive design 🌐.
+A real-time Slack like collaborative platform for creating and managing workspaces, channels, and private messaging, with advanced admin controls and responsive design 🌐.
 
-## Features
+## 📚 Index
+- [✨ Features](#✨-features)
+   - [🔐 User Management](#🔐-user-management)
+   - [🏢 Workspace and Channel Management](#🏢-workspace-and-channel-management)
+   - [💬 Messaging and Collaboration](#💬-messaging-and-collaboration)
+   - [🌟 Additional Features](#🌟-additional-features)
+- [🛠️ Tech Stack](#🛠️-tech-stack)
+   - [🎨 Frontend](#🎨-frontend)
+   - [🖥️ Backend](#🖥️-backend)
+- [🎥 Preview Video](#🎥-preview-video)
+- [⚙️ Installation and Setup](#⚙️-installation-and-setup)
+   - [✅ Prerequisites](#✅-prerequisites)
+   - [📝 Steps](#📝-steps)
 
-### User Management
+
+## ✨ Features
+
+### 🔐 User Management
 
 - Users can signup and login using their credentials with cookie-based authentication using JWT.
 - Users can reset their password by requesting a password reset link via email.
 - Users can update their username and verify their email in settings (verification link sent via email).
 - Members can send private direct messages to other members.
 
-### Workspace and Channel Management
+### 🏢 Workspace and Channel Management
 
 - Users can create and switch between multiple workspaces.
 - Admins can update workspace details (name, image) and delete workspaces.
@@ -24,7 +40,7 @@ A real-time collaborative platform for creating and managing workspaces, channel
 - Admins can create, rename, and delete channels within a workspace.
 - Members can switch between channels in a workspace.
 
-### Messaging and Collaboration
+### 💬 Messaging and Collaboration
 
 - Messages are fetched and displayed for selected channels with real-time updates using WebSocket.
 - Supports a rich-text input editor with features like bold, italic, underline, links, code, and bullets.
@@ -32,7 +48,7 @@ A real-time collaborative platform for creating and managing workspaces, channel
 - Members can react to messages and view reaction details.
 - Messages can be deleted by the sender with real-time updates.
 
-### Additional Features
+### 🌟 Additional Features
 
 - Integrated Razorpay for secure subscription payment processing.
 - Supports dark mode and light mode switching.
@@ -40,9 +56,9 @@ A real-time collaborative platform for creating and managing workspaces, channel
 - Frontend technologies include React, Axios, Firebase, Razorpay, and React Query.
 - Backend technologies include Express, Mongoose, Socket.io, Nodemailer, Bull, and Redis.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-### Frontend
+### 🎨 Frontend
 
 - **UI Frameworks**: `shadCN`, `TailwindCSS`
 - **APIs & Libraries**: `axios`, `firebase`, `razorpay`, `socket.io-client`
@@ -50,7 +66,7 @@ A real-time collaborative platform for creating and managing workspaces, channel
 - **Routing**: `react-router-dom`
 - **State Management**: `react-query`
 
-### Backend
+### 🖥️ Backend
 
 - **Server Framework**: `Express`
 - **Database & ORM**: `Mongoose`
@@ -61,20 +77,21 @@ A real-time collaborative platform for creating and managing workspaces, channel
 - **Validation**: `Zod`
 - **Email Service**: `Nodemailer`
 
-## Preview Video
+## 🎥 Preview Video
 
 [![Watch the video](https://img.youtube.com/vi/4w6iMgFqoU0/maxresdefault.jpg)](https://www.youtube.com/watch?v=4w6iMgFqoU0)
+(Will be available soon)
 
-## Installation and Setup
+## ⚙️ Installation and Setup
 
-### Prerequisites
+### ✅ Prerequisites
 
 - Node.js and npm/yarn installed.
 - MongoDB database set up locally or on a cloud provider.
 - Radis server set up locally or or a cloud provider.
 - Razorpay account for subscription payments
 
-### Steps
+### 📝 Steps
 
 0. Make a folder for the project and cd into it
 
