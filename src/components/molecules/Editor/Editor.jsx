@@ -7,9 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import CustomTooltip from "@/components/atoms/Tooltip/CustomTooltip";
 import { Button } from "@/components/ui/button";
 import useUploadImage from "@/hooks/firebase/useUploadImage";
-import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress";
 import { getErrorMessage } from "@/utils/getErrorMessage";
-
 
 function Editor({
   varient = "create",
@@ -24,6 +23,7 @@ function Editor({
   const placeholderRef = useRef(placeholder || "");
   const quillRef = useRef(null);
   const [text, setText] = useState("");
+  const imageUrlRef = useRef(null);
   const [imageFile, setImageFile] = useState(null);
   const imageInputRef = useRef(null);
   const {
@@ -35,7 +35,7 @@ function Editor({
     setImageUrl,
     uploadImageToFirebase,
     deleteImageFromFirebase,
-    isDeletingImage
+    isDeletingImage,
   } = useUploadImage();
 
   async function handleImageUpload() {
@@ -43,24 +43,26 @@ function Editor({
     imageInputRef.current.value = null;
   }
 
-  async function handleImageCancel () {
+  async function handleImageCancel() {
     if (!imageUrl) return;
     await deleteImageFromFirebase(imageUrl);
     setImageUrl(null);
     setImageFile(null);
   }
 
-
   function toogleToolbar() {
     const toolbar = containerRef.current.querySelector(".ql-toolbar");
     toolbar.style.display = toolbar.style.display === "none" ? "block" : "none";
   }
 
+  useEffect(() => {
+    imageUrlRef.current = imageUrl;
+  }, [imageUrl]);
+
   function handleSend() {
     if (quillRef.current) {
       const data = quillRef.current?.getContents();
-      const image = imageUrl;
-      onSubmit({ editorContent: data, image });
+      onSubmit({ editorContent: data, image : imageUrlRef.current });
       quillRef.current.setText("");
       setImageUrl(null);
       setImageFile(null);
@@ -136,19 +138,34 @@ function Editor({
     }
   }, [imageFile]);
 
-
   return (
     <div className="flex flex-col md:p-1 relative">
-      {imageFile && <div className="h-20 w-20 rounded-md overflow-hidden shadow-md absolute z-20 border-2 mb-2 -top-20 bg-gray-200 dark:bg-gray-800">
-        <Button className="absolute top-1 right-1" size="xs" variant="outline" onClick={handleImageCancel} ><X/></Button>
-        { isUploading && <Progress className="w-[90%] mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" value={loadingPercentage}/>}
-        {isError && <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">{getErrorMessage(error)}</div>}
-        {imageUrl && <img
-        className="size-full"
-          src={imageUrl}
-          alt="uploaded image"
-        />}
-      </div>}
+      {imageFile && (
+        <div className="h-20 w-20 rounded-md overflow-hidden shadow-md absolute z-20 border-2 mb-2 -top-20 bg-gray-200 dark:bg-gray-800">
+          <Button
+            className="absolute top-1 right-1"
+            size="xs"
+            variant="outline"
+            onClick={handleImageCancel}
+          >
+            <X />
+          </Button>
+          {isUploading && (
+            <Progress
+              className="w-[90%] mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              value={loadingPercentage}
+            />
+          )}
+          {isError && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              {getErrorMessage(error)}
+            </div>
+          )}
+          {imageUrl && (
+            <img className="size-full" src={imageUrl} alt="uploaded image" />
+          )}
+        </div>
+      )}
       <input
         type="file"
         accept="image/*"
