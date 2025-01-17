@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import useCreateWorkspaceContext from "@/hooks/apis/context/useCreateWorkspaceContext";
 import useGetUserWorkspace from "@/hooks/apis/workspaces/useGetUserWorkspace";
+import JumpLoader from "@/components/atoms/Loader/JumpLoader";
 
 function Workspaces() {
   const { workspacesData, isError, isLoading } =
@@ -22,7 +23,9 @@ function Workspaces() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [workspacesData, isLoading, isError]);
 
-  return <div>Wokspaces</div>;
+  return <div className="h-screen w-screen grid place-content-center">
+    <JumpLoader/>
+  </div>;
 }
 
 export default Workspaces;

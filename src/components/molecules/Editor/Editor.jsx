@@ -96,8 +96,8 @@ function Editor({
             },
             enter: {
               key: "Enter",
-              handler: function (range, context) {
-                return;
+              handler: function () {
+                handleSend();
               },
             },
             shift_enter: {
