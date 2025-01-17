@@ -1,5 +1,5 @@
 <div align="center">
-    <img height="100px" width="100%" alt="Anime messaging" style="object-fit: cover;" src="./public/readmeImage.gif"/>
+    <img height="80px" alt="Anime messaging" src="./public/readmeImage.gif"/>
     <h1>Slack Clone</h1>
 </div>
 
@@ -76,6 +76,9 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - **Queue Management**: `Bull`, `ioredis`
 - **Validation**: `Zod`
 - **Email Service**: `Nodemailer`
+
+## 🌐 Live Link
+[https://slackapp-rho.vercel.app/workspaces](https://slackapp-rho.vercel.app/workspaces)
 
 ## 🎥 Preview Video
 
