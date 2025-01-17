@@ -3,6 +3,7 @@ import WorkspacePreferenceModal from "@/components/organisms/Models/WorkspacePre
 import CreateChannelModal from "./CreateChannelModal/CreateChannelModal";
 import AddMemberLinkModal from "./AddMemberLinkModal/AddMemberLinkModal";
 import UserProfileModal from "./UserProfileModal/UserProfileModal";
+import SearchBoxModal from "./SearchBox/SearchBoxModal";
 
 function ModelContainer() {
   return (
@@ -12,6 +13,7 @@ function ModelContainer() {
       <CreateChannelModal/>
       <AddMemberLinkModal/>
       <UserProfileModal/>
+      <SearchBoxModal/>
     </>
   );
 }

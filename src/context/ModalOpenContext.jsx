@@ -8,6 +8,7 @@ export function ModalOpenProvider({ children }) {
   const [createChannelModalOpen, setCreateChannelModalOpen] = useState(false);
   const [workspaceLinkModalOpen, setWorkspaceLinkModalOpen] = useState(false);
   const [userProfileModalOpen, setUserProfileModalOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
 
   return (
     <ModalOpenContext.Provider
@@ -19,7 +20,9 @@ export function ModalOpenProvider({ children }) {
         workspaceLinkModalOpen,
         setWorkspaceLinkModalOpen,
         userProfileModalOpen,
-        setUserProfileModalOpen
+        setUserProfileModalOpen,
+        searchModalOpen,
+        setSearchModalOpen
       }}
     >
       {children}
