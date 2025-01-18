@@ -13,7 +13,6 @@ function ModelContainer() {
       <CreateChannelModal/>
       <AddMemberLinkModal/>
       <UserProfileModal/>
-      <SearchBoxModal/>
     </>
   );
 }

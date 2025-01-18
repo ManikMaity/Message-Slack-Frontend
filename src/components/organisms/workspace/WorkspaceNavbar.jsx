@@ -7,6 +7,7 @@ import { useTheme } from "@/components/organisms/theme/theme-provider";
 import { Button } from "@/components/ui/button";
 import useModalOpenContext from "@/hooks/apis/context/useModalOpenContext";
 import useGetWorkspaceData from "@/hooks/apis/workspaces/useGetWorkspaceData";
+import SearchBoxModal from "../Models/SearchBox/SearchBoxModal";
 
 function WorkspaceNavbar() {
   const { id } = useParams();
@@ -29,7 +30,9 @@ function WorkspaceNavbar() {
 
   return (
     <nav className="flex w-full h-full items-center justify-between px-4">
-      <div></div>
+      <div>
+        <SearchBoxModal/>
+      </div>
       <Button
         onClick={() => setSearchModalOpen(true)}
         variant="transparent"

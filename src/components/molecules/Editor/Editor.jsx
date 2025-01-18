@@ -62,7 +62,7 @@ function Editor({
   function handleSend() {
     if (quillRef.current) {
       const data = quillRef.current?.getContents();
-      onSubmit({ editorContent: data, image : imageUrlRef.current });
+      onSubmit({ editorContent: data, simpleText: quillRef.current?.getText(), image : imageUrlRef.current });
       quillRef.current.setText("");
       setImageUrl(null);
       setImageFile(null);

@@ -13,7 +13,7 @@ function DatabaseError({errorTitle, errorMessage, styleObj = {}, onClickFn = () 
   return (
     <Card style={styleObj} className="w-full max-w-xl mx-auto shadow-none border-none bg-transparent">
       <CardHeader>
-        <CardTitle className="text-red-500 text-2xl font-bold">{errorTitle || "Server Error"}</CardTitle>
+        <CardTitle className="text-red-500 text-xl md:text-2xl font-bold">{errorTitle || "Server Error"}</CardTitle>
         <CardDescription>{errorMessage || "An unespected error has occured."}</CardDescription>
       </CardHeader>
       <CardFooter className="">

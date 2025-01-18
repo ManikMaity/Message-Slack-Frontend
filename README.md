@@ -1,26 +1,18 @@
 <div align="center">
-    <img height="80px" alt="Anime messaging" src="./public/readmeImage.gif"/>
+    <img width="80" alt="Anime messaging" src="./public/readmeImage.gif"/>
     <h1>Slack Clone</h1>
 </div>
 
 A real-time Slack like collaborative platform for creating and managing workspaces, channels, and private messaging, with advanced admin controls and responsive design 🌐.
 
 ## 📚 Index
-- [✨ Features](#✨-features)
-   - [🔐 User Management](#🔐-user-management)
-   - [🏢 Workspace and Channel Management](#🏢-workspace-and-channel-management)
-   - [💬 Messaging and Collaboration](#💬-messaging-and-collaboration)
-   - [🌟 Additional Features](#🌟-additional-features)
-- [🛠️ Tech Stack](#🛠️-tech-stack)
-   - [🎨 Frontend](#🎨-frontend)
-   - [🖥️ Backend](#🖥️-backend)
-- [🎥 Preview Video](#🎥-preview-video)
-- [⚙️ Installation and Setup](#⚙️-installation-and-setup)
-   - [✅ Prerequisites](#✅-prerequisites)
-   - [📝 Steps](#📝-steps)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Live Link](#live-link)
+- [Preview Video](#preview-video)
+- [Installation and Setup](#installation-and-setup)
 
-
-## ✨ Features
+## Features
 
 ### 🔐 User Management
 
@@ -56,7 +48,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - Frontend technologies include React, Axios, Firebase, Razorpay, and React Query.
 - Backend technologies include Express, Mongoose, Socket.io, Nodemailer, Bull, and Redis.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### 🎨 Frontend
 
@@ -77,15 +69,15 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - **Validation**: `Zod`
 - **Email Service**: `Nodemailer`
 
-## 🌐 Live Link
+## Live Link
 [https://slackapp-rho.vercel.app/workspaces](https://slackapp-rho.vercel.app/workspaces)
 
-## 🎥 Preview Video
+## Preview Video
 
 [![Watch the video](https://img.youtube.com/vi/4w6iMgFqoU0/maxresdefault.jpg)](https://www.youtube.com/watch?v=4w6iMgFqoU0)
 (Will be available soon)
 
-## ⚙️ Installation and Setup
+## Installation and Setup
 
 ### ✅ Prerequisites
 

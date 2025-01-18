@@ -12,11 +12,12 @@ function useHandleChannelMessage({channelId, userId, workspaceId}) {
   const {auth} = useAuthContext();
 
 
-   function handleSubmit({ editorContent, image }) {
+   function handleSubmit({ editorContent, simpleText, image }) {
       const jsonContent = JSON.stringify(editorContent);
-      console.log(jsonContent);
+      const simpleTextContent = JSON.stringify(simpleText).replace(/\\n/g, "");
       socket?.emit("NewMessage", {
         channelId: channelId,
+        simpleText : JSON.parse(simpleTextContent),
         text: jsonContent,
         image,
         senderId: userId,
