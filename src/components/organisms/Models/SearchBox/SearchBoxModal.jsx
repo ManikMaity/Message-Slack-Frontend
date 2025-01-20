@@ -26,10 +26,6 @@ function SearchBoxModal() {
 
   const navigator = useNavigate();
 
-  useEffect(() => {
-    console.log(searchQuery);
-  }, [id, searchQuery]);
-
   return (
     <Dialog
       open={searchModalOpen}
@@ -80,8 +76,7 @@ function SearchBoxModal() {
           {isMessagesError && (
             <DatabaseError
               onClickFn={() => refetch()}
-              errorTitle={messagesError.err[0]}
-              errorMessage={messagesError.message}
+              errorTitle={messagesError.message}
             />
           )}
         </div>
