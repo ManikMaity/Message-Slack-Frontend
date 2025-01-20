@@ -36,7 +36,7 @@ function WorkspaceNavbar() {
       <Button
         onClick={() => setSearchModalOpen(true)}
         variant="transparent"
-        className="flex shadow-none items-center text-gray-300   font-normal justify-between w-[60%] max-w-md h-full bg-accent dark:bg-accent/60 hover:text-white px-2 rounded-md"
+        className="flex shadow-none items-center text-gray-300   font-normal justify-between w-[60%] max-w-md h-full bg-accent/20 dark:bg-accent/60 hover:text-white px-2 rounded-md"
       >
         <span className="overflow-hidden">{`Search in ${workspaceData?.name}`}</span>
         <Search className="h-4 w-4" />

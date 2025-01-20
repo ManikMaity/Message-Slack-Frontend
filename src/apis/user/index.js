@@ -33,3 +33,15 @@ export async function verifyEmail(token) {
 }
 
 
+export async function getUserProfile() {
+    try {
+        const response = await axios.get("/user", {
+            headers: {
+                slack_token: localStorage.getItem("access-token"),
+            },
+        });
+        return response.data?.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+}

@@ -4,19 +4,27 @@ import { toast } from "@/hooks/use-toast";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import useGetUserProfile from "../user/useGetUserProfile";
+import useAuthContext from "../context/useAuthContext";
 
 function usePayment() {
+
+  const {getUserProfileMutateAsync} = useGetUserProfile();
+  const {setAuth} = useAuthContext();
   
   const navigate = useNavigate();
 
     const {mutateAsync : capturePaymentMutateAsync} = useMutation({
         mutationFn: capturePayment,
-        onSuccess: () => {
+        onSuccess: async () => {
           toast({
             title: "Payment successful.",
             description: `Your payment has been successfully done.`,
             status: "success",
           });
+          const user = await getUserProfileMutateAsync();
+          setAuth(prev => ({...prev, user}));
+          localStorage.setItem("user", JSON.stringify(user));
           navigate("/");
         },
         onError: (err) => {
