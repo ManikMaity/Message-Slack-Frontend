@@ -1,26 +1,23 @@
+import "./message.css";
+
+import { Trash } from "lucide-react";
+
+import MessageImageThumbnail from "@/components/atoms/MessageImageThumnail/MessageImageThumbnail";
 import { MessageRenderer } from "@/components/atoms/MessageRenderer/MessageRenderer";
+import Reaction from "@/components/atoms/Reaction/Reaction";
+import ReactionsRender from "@/components/atoms/Reaction/ReactionsRender";
 import CustomTooltip from "@/components/atoms/Tooltip/CustomTooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import useAuthContext from "@/hooks/apis/context/useAuthContext";
 import {
   dateStringToLocalString,
   dateStringToTime,
 } from "@/utils/dataFormater";
-import React from "react";
-import "./message.css";
-import useAuthContext from "@/hooks/apis/context/useAuthContext";
-import MessageImageThumbnail from "@/components/atoms/MessageImageThumnail/MessageImageThumbnail";
-import { Trash } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import useSocketContext from "@/hooks/apis/context/useSocketContext";
-import { toast } from "@/hooks/use-toast";
-import useUploadImage from "@/hooks/firebase/useUploadImage";
-import Reaction from "@/components/atoms/Reaction/Reaction";
-import ReactionsRender from "@/components/atoms/Reaction/ReactionsRender";
-import { getErrorMessage } from "@/utils/getErrorMessage";
 
 const data = {
   _id: "677e1a86354df5b9dc72be63",
-  text: '{"ops":[{"insert":"hello\\n"}]}',
+  text: "{\"ops\":[{\"insert\":\"hello\\n\"}]}",
   channelId: "6765a50c21299891f9410921",
   senderId: {
     _id: "6736fbce428c5298f1c51426",
@@ -84,7 +81,7 @@ function Message({ messageData = data, handleDeleteMessage, handleReactionClick 
             </Button>
           </div>
         </div>
-        <div className="mt-0.5">
+        <div className="mt-0.5 max-w-lg">
           {messageData?.image && messageData?.image !== "dlImg" && (
             <MessageImageThumbnail url={messageData?.image} />
           )}

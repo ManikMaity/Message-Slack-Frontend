@@ -49,10 +49,7 @@ More feature ->
 - Leave Workspace by user ✔️
 - Make member admin ✔️
 - All user and admin remove member ✔️
-- On enter submit, workspaces loader
-- Edit message
-- Reply  to message ⭕
-- Scroll to get more message
+- On enter submit, workspaces loader ✔️
 - DM ✔️
 - Delete message ✔️ 
-- Add AI Agent Chat
+- Add AI Agent Chat ✔️

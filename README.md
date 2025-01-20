@@ -31,6 +31,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - Admins can remove members or promote them to admin.
 - Admins can create, rename, and delete channels within a workspace.
 - Members can switch between channels in a workspace.
+- Members can search workspace messagers.
 
 ### 💬 Messaging and Collaboration
 
@@ -39,6 +40,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - Members can upload single images with messages.
 - Members can react to messages and view reaction details.
 - Messages can be deleted by the sender with real-time updates.
+- Subcribed users can use AI text generator to generate messages.
 
 ### 🌟 Additional Features
 
@@ -53,7 +55,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
 ### 🎨 Frontend
 
 - **UI Frameworks**: `shadCN`, `TailwindCSS`
-- **APIs & Libraries**: `axios`, `firebase`, `razorpay`, `socket.io-client`
+- **APIs & Libraries**: `axios`, `firebase`, `razorpay`, `socket.io-client`, `gemini`
 - **Rich Text Editor**: `Quill`
 - **Routing**: `react-router-dom`
 - **State Management**: `react-query`
@@ -70,12 +72,13 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - **Email Service**: `Nodemailer`
 
 ## Live Link
-[https://slackapp-rho.vercel.app/workspaces](https://slackapp-rho.vercel.app/workspaces)
+ - [Live Website](https://slackapp-rho.vercel.app/workspaces)
+-  [Backend Repository](https://github.com/ManikMaity/Message-Slack-Backend)
 
 ## Preview Video
+[![Video Preview](./public/preview.jpg)](https://youtu.be/-6a_Yuq3I8w?si=AbryGDFOXBjS7zzM)
 
-[![Watch the video](https://img.youtube.com/vi/4w6iMgFqoU0/maxresdefault.jpg)](https://www.youtube.com/watch?v=4w6iMgFqoU0)
-(Will be available soon)
+
 
 ## Installation and Setup
 
@@ -144,6 +147,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
    VITE_BACKEND_SOCKET_URL="http://localhost:3000"
    VITE_FIREBASE_API_KEY="your firebase api key"
    VITE_RAZORPAY_ID="your_razorpay_id"
+   VITE_GEMINI_API_KEY = "your_gemini_api_key"
    ```
 8. **Start the frontend server:**
    ```bash
