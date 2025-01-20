@@ -8,6 +8,8 @@ import { Toaster } from "@/components/ui/toaster";
 import ModelContainer from "./components/organisms/Models/ModelContainer";
 import AppContextProvider from "./context/AppContextProvider";
 import { AppRoutes } from "./pages/Routes";
+import { ErrorBoundary } from "react-error-boundary";
+import CustomErrorBoundary from "./components/atoms/ErrorBoundary/CustomErrorBoundary";
 
 function App() {
   const queryClient = new QueryClient();
@@ -15,8 +17,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppContextProvider>
-        <AppRoutes />
-        <ModelContainer/>
+        <ErrorBoundary FallbackComponent={CustomErrorBoundary} onReset={() => window.location.reload()}>
+          <AppRoutes />
+        </ErrorBoundary>
+        <ModelContainer />
         <Toaster />
       </AppContextProvider>
     </QueryClientProvider>

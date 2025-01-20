@@ -5,6 +5,7 @@ import useSearchMessage from "@/hooks/apis/message/useSearchMessage";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DatabaseError from "../../errors/DatabaseError";
+import { isJsonString } from "@/utils/dataFormater";
 
 function SearchContent({ debouncedQuery }) {
 
@@ -42,6 +43,7 @@ function SearchContent({ debouncedQuery }) {
               >
                 <div className="w-9 rounded-md overflow-hidden">
                   <img
+                    className="w-full"
                     src={message?.senderId?.avatar}
                     alt={message?.senderId?.username + "s avatar"}
                   />
@@ -51,7 +53,7 @@ function SearchContent({ debouncedQuery }) {
                     {message?.senderId?.username}
                   </span>
                   <div className="line-clamp-1">
-                    <MessageRenderer value={message?.text} />
+                    {isJsonString(message?.text) ?  <MessageRenderer value={message?.text} /> : <p>{message?.text}</p> }
                   </div>
                 </div>
               </button>

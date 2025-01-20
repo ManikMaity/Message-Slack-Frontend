@@ -16,3 +16,12 @@ export function getImagePathFromFirebaseImageUrl(url) {
   imagePath = decodeURIComponent(imagePath);
   return imagePath;
 }
+
+export function isJsonString(str) {
+  try {
+      JSON.parse(str);
+  } catch (e) {
+      return false;
+  }
+  return true;
+}
