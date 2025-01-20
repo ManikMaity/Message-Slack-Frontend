@@ -46,8 +46,8 @@ function SearchBoxModal() {
         <hr className="my-2" />
         <div className="py-1">
           {isMessagesSuccess && messages?.length !== 0 && (
-            <div>
-              {messages?.map((message) => {
+            <div className="max-h-80 overflow-y-auto">
+              {messages?.reverse().map((message) => {
                 return (
                   <button key={message.id} onClick={() => {
                     navigator(`/workspace/${message.workspaceId}/channel/${message.channelId}`);
