@@ -21,13 +21,12 @@ export default [
     settings: { react: { version: "18.3" } },
     plugins: {
       react,
-      "simple-import-sort": simpleImportSort,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
     },
     rules: {
-      "semi" : ["error", "always"],
-      "quotes" : ["error", "double"],
+      semi: ["error", "always"],
+      quotes: ["error", "double"],
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       ...js.configs.recommended.rules,

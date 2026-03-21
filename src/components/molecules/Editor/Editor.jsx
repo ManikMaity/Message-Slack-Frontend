@@ -16,7 +16,7 @@ import useUploadImage from "@/hooks/firebase/useUploadImage";
 import { Progress } from "@/components/ui/progress";
 import { getErrorMessage } from "@/utils/getErrorMessage";
 import Spinner from "../Spinner";
-import usePromptResponse from "@/hooks/groq/usePromptResponse";
+import usePromptResponse from "@/hooks/message/usePromptResponse";
 
 function Editor({
   varient = "create",
@@ -50,7 +50,7 @@ function Editor({
     isDeletingImage,
   } = useUploadImage();
 
-  const { getResponseFromPrompt, loading } = usePromptResponse();
+  const { createAIMessageMutateAsync, isPending } = usePromptResponse();
 
   /* ---------------------- AI PROMPT ---------------------- */
 
@@ -59,7 +59,12 @@ function Editor({
 
     if (!userPrompt.trim()) return;
 
-    const response = await getResponseFromPrompt(userPrompt);
+    const responseData = await createAIMessageMutateAsync({
+      prompt: userPrompt,
+    });
+
+    const response = responseData?.response;
+    if (!response) return;
 
     if (response && quillRef.current) {
       const quill = quillRef.current;
@@ -251,10 +256,10 @@ function Editor({
               <Button
                 type="submit"
                 variant="secondary"
-                disabled={loading}
+                disabled={isPending}
                 className="h-full"
               >
-                {loading ? <Spinner /> : <SendHorizonal />}
+                {isPending ? <Spinner /> : <SendHorizonal />}
               </Button>
             </CustomTooltip>
           </form>

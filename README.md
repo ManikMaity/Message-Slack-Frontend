@@ -6,6 +6,7 @@
 A real-time Slack like collaborative platform for creating and managing workspaces, channels, and private messaging, with advanced admin controls and responsive design 🌐.
 
 ## 📚 Index
+
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Live Link](#live-link)
@@ -55,7 +56,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
 ### 🎨 Frontend
 
 - **UI Frameworks**: `shadCN`, `TailwindCSS`
-- **APIs & Libraries**: `axios`, `firebase`, `razorpay`, `socket.io-client`, `gemini`
+- **APIs & Libraries**: `axios`, `firebase`, `razorpay`, `socket.io-client`, `groq`
 - **Rich Text Editor**: `Quill`
 - **Routing**: `react-router-dom`
 - **State Management**: `react-query`
@@ -72,13 +73,13 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - **Email Service**: `Nodemailer`
 
 ## Live Link
- - [Live Website](https://slackapp-rho.vercel.app/workspaces)
--  [Backend Repository](https://github.com/ManikMaity/Message-Slack-Backend)
+
+- [Live Website](https://slackapp-rho.vercel.app/workspaces)
+- [Backend Repository](https://github.com/ManikMaity/Message-Slack-Backend)
 
 ## Preview Video
+
 [![Video Preview](./public/preview.jpg)](https://youtu.be/-6a_Yuq3I8w?si=AbryGDFOXBjS7zzM)
-
-
 
 ## Installation and Setup
 
@@ -147,7 +148,6 @@ A real-time Slack like collaborative platform for creating and managing workspac
    VITE_BACKEND_SOCKET_URL="http://localhost:3000"
    VITE_FIREBASE_API_KEY="your firebase api key"
    VITE_RAZORPAY_ID="your_razorpay_id"
-   VITE_GEMINI_API_KEY = "your_gemini_api_key"
    ```
 8. **Start the frontend server:**
    ```bash
