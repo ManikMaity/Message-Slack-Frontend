@@ -12,12 +12,21 @@ import { ErrorBoundary } from "react-error-boundary";
 import CustomErrorBoundary from "./components/atoms/ErrorBoundary/CustomErrorBoundary";
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 3,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
       <AppContextProvider>
-        <ErrorBoundary FallbackComponent={CustomErrorBoundary} onReset={() => window.location.reload()}>
+        <ErrorBoundary
+          FallbackComponent={CustomErrorBoundary}
+          onReset={() => window.location.reload()}
+        >
           <AppRoutes />
         </ErrorBoundary>
         <ModelContainer />
