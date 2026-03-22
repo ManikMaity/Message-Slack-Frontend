@@ -1,6 +1,6 @@
 <div align="center">
     <img width="80" alt="Anime messaging" src="./public/readmeImage.gif"/>
-    <h1>Slack Clone</h1>
+    <h1>Chattr</h1>
 </div>
 
 A real-time Slack like collaborative platform for creating and managing workspaces, channels, and private messaging, with advanced admin controls and responsive design 🌐.
@@ -74,8 +74,8 @@ A real-time Slack like collaborative platform for creating and managing workspac
 
 ## Live Link
 
-- [Live Website](https://slackapp-rho.vercel.app/workspaces)
-- [Backend Repository](https://github.com/ManikMaity/Message-Slack-Backend)
+- [Live Website](https://chattr-app.vercel.app/workspaces)
+- [Backend Repository](https://github.com/ManikMaity/chattr-backend)
 
 ## Preview Video
 
@@ -95,14 +95,14 @@ A real-time Slack like collaborative platform for creating and managing workspac
 0. Make a folder for the project and cd into it
 
    ```bash
-   mkdir slack-clone
-   cd slack-clone
+   mkdir chattr
+   cd chattr
    ```
 
 1. **Clone the backend Repository:**
    ```bash
-   git clone https://github.com/ManikMaity/Message-Slack-Backend.git
-   cd Message-Slack-Backend
+   git clone https://github.com/ManikMaity/chattr-backend.git
+   cd chattr-backend
    ```
 2. **Install dependencies:**
    ```bash
@@ -126,6 +126,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
    RAZORPAY_SECRET="your_razorpay_secret"
    ENABLE_EMAIL_VERIFICATION=true
    JWT_EXPIRY="1y"
+   GROQ_API=your_groq_api
    ```
 4. **Start the backend server:**
    ```bash
@@ -134,8 +135,8 @@ A real-time Slack like collaborative platform for creating and managing workspac
 5. **Clone Frontend Repository:**
    ```bash
    cd ..
-   git clone https://github.com/ManikMaity/Message-Slack-Frontend.git
-   cd Message-Slack-Frontend
+   git clone https://github.com/ManikMaity/chattr-frontend.git
+   cd chattr-frontend
    ```
 6. **Install dependencies:**
    ```bash
