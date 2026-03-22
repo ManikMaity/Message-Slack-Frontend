@@ -10,7 +10,7 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Live Link](#live-link)
-- [Preview Video](#preview-video)
+- [Preview Images](#preview-images)
 - [Installation and Setup](#installation-and-setup)
 
 ## Features
@@ -48,8 +48,6 @@ A real-time Slack like collaborative platform for creating and managing workspac
 - Integrated Razorpay for secure subscription payment processing.
 - Supports dark mode and light mode switching.
 - Designed with responsive UI using TailwindCSS and shadCN.
-- Frontend technologies include React, Axios, Firebase, Razorpay, and React Query.
-- Backend technologies include Express, Mongoose, Socket.io, Nodemailer, Bull, and Redis.
 
 ## Tech Stack
 
@@ -74,12 +72,38 @@ A real-time Slack like collaborative platform for creating and managing workspac
 
 ## Live Link
 
-- [Live Website](https://chattr-app.vercel.app/workspaces)
+- [Live Website](https://chattr.manikmaity.com/)
 - [Backend Repository](https://github.com/ManikMaity/chattr-backend)
 
-## Preview Video
+## Preview Images
 
-[![Video Preview](./public/preview.jpg)](https://youtu.be/-6a_Yuq3I8w?si=AbryGDFOXBjS7zzM)
+### Channel
+
+<img src="./public/chattr/channel.webp"/>
+
+### Member
+
+<img src="./public/chattr/member-page.webp"/>
+
+### Private Messaging
+
+<img src="./public/chattr/private-message.webp"/>
+
+### Workspace Join
+
+<img src="./public/chattr/workspace-join.webp"/>
+
+### Signup
+
+<img src="./public/chattr/signup.webp"/>
+
+### Signin
+
+<img src="./public/chattr/signin.webp"/>
+
+### Payment
+
+<img src="./public/chattr/payment.webp"/>
 
 ## Installation and Setup
 
